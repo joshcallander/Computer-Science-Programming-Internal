@@ -28,21 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.PnlGame = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // PnlGame
             // 
-            this.PnlGame.Location = new System.Drawing.Point(4, 62);
+            this.PnlGame.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PnlGame.BackgroundImage")));
+            this.PnlGame.Cursor = System.Windows.Forms.Cursors.Default;
+            this.PnlGame.Location = new System.Drawing.Point(2, 46);
             this.PnlGame.Name = "PnlGame";
-            this.PnlGame.Size = new System.Drawing.Size(574, 376);
+            this.PnlGame.Size = new System.Drawing.Size(646, 376);
             this.PnlGame.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.ClientSize = new System.Drawing.Size(800, 482);
             this.Controls.Add(this.PnlGame);
             this.Name = "Form1";
             this.Text = "Form1";
