@@ -28,6 +28,8 @@ namespace Assessment
         int score = 0;
         int lives = 5;
 
+        bool left, right, up, down;
+
         Random speed = new Random();
 
         public FrmAssessment()
@@ -57,7 +59,79 @@ namespace Assessment
             }
         }
 
-        private void TmrMove_Tick(object sender, EventArgs e)
+        private void FrmAssessment_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Left) { left = true; }
+            if (e.KeyData == Keys.Right) { right = true; }
+
+            if (e.KeyData == Keys.Up) { up = true; }
+            if (e.KeyData == Keys.Down) { down = true; }
+
+        }
+
+        private void FrmAssessment_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Left) { left = false; }
+            if (e.KeyData == Keys.Right) { right = false; }
+
+            if (e.KeyData == Keys.Up) { up = false; }
+            if (e.KeyData == Keys.Down) { down = false; }
+
+        }
+
+        private void TmrSurfer_Tick(object sender, EventArgs e)
+        {
+            if (left) // if left arrow pressed
+            {
+                if (surferRectangle.X < 10) //check to see if spaceship within 10 of left side
+                {
+                    surferRectangle.X = 10; //if it is < 10 away "bounce" it (set position at 10)
+                }
+                else
+                {
+                    surferRectangle.X -= 5; //else move 5 to the left
+                }
+            }
+            if (right) // if right arrow key pressed
+            {
+                if (surferRectangle.X > PnlGame.Width - 40)// is spaceship within 40 of right side
+                {
+                    surferRectangle.X = PnlGame.Width - 40;
+                }
+                else
+                {
+                    surferRectangle.X += 5;
+                }
+
+            }
+
+            if (up) // if right arrow key pressed
+            {
+                if (surferRectangle.Y < 15)// is spaceship within 40 of right side
+                {
+                    surferRectangle.Y = 15;
+                }
+                else
+                {
+                    surferRectangle.Y -= 5;
+                }
+            }
+
+            if (down) // if right arrow key pressed
+            {
+                if (surferRectangle.Y > PnlGame.Height - 40)// is spaceship within 40 of right side
+                {
+                    surferRectangle.Y = PnlGame.Height - 40;
+                }
+                else
+                {
+                    surferRectangle.Y += 5;
+                }
+            }
+
+        }
+
+        private void TmrShark_Tick(object sender, EventArgs e)
         {
             for (int i = 0; i <= 7; i++)
             {
@@ -76,8 +150,18 @@ namespace Assessment
                 }
 
                 PnlGame.Invalidate();
+
+                sharkSpeed[i] = speed.Next(15, 20);//ch planet has a random speed
             }
             
+        }
+
+        private void FrmAssessment_Load(object sender, EventArgs e)
+        {
+            MessageBox.Show("Use the left, right, up and dow arrow keys to move the surfer. \n \n Dont touch Don't get hit by the planets! \n \n Every planet that goes past scores a point. \n \n If a planet hits a spaceship a life is lost!", "Game Instructions");
+            TxtName.Focus();
+            MnuStart.Enabled = false;
+
         }
 
     }
