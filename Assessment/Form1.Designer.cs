@@ -44,7 +44,7 @@
             // 
             // TmrShark
             // 
-            this.TmrShark.Enabled = true;
+            this.TmrShark.Tick += new System.EventHandler(this.TmrShark_Tick_1);
             // 
             // PnlGame
             // 
@@ -59,6 +59,7 @@
             // TmrSurfer
             // 
             this.TmrSurfer.Enabled = true;
+            this.TmrSurfer.Tick += new System.EventHandler(this.TmrSurfer_Tick_1);
             // 
             // LvlCount
             // 
@@ -160,6 +161,9 @@
             this.Controls.Add(this.PnlGame);
             this.Name = "FrmAssessment";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.FrmAssessment_Load_1);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmAssessment_KeyDown_1);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FrmAssessment_KeyUp_1);
             this.ResumeLayout(false);
             this.PerformLayout();
 
