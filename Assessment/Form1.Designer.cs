@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAssessment));
             this.TmrShark = new System.Windows.Forms.Timer(this.components);
             this.PnlGame = new System.Windows.Forms.Panel();
             this.TmrSurfer = new System.Windows.Forms.Timer(this.components);
@@ -38,8 +39,10 @@
             this.ScoreCount = new System.Windows.Forms.Label();
             this.LvsTxt = new System.Windows.Forms.TextBox();
             this.LvsCount = new System.Windows.Forms.Label();
-            this.StartGame = new System.Windows.Forms.Button();
-            this.StopGame = new System.Windows.Forms.Button();
+            this.levelprogress = new System.Windows.Forms.ProgressBar();
+            this.label1 = new System.Windows.Forms.Label();
+            this.BottleTimer = new System.Windows.Forms.Timer(this.components);
+            this.BottleTimeWait = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // TmrShark
@@ -48,7 +51,9 @@
             // 
             // PnlGame
             // 
-            this.PnlGame.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.PnlGame.BackColor = System.Drawing.Color.White;
+            this.PnlGame.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PnlGame.BackgroundImage")));
+            this.PnlGame.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PnlGame.Cursor = System.Windows.Forms.Cursors.Default;
             this.PnlGame.Location = new System.Drawing.Point(2, 46);
             this.PnlGame.Name = "PnlGame";
@@ -58,7 +63,6 @@
             // 
             // TmrSurfer
             // 
-            this.TmrSurfer.Enabled = true;
             this.TmrSurfer.Tick += new System.EventHandler(this.TmrSurfer_Tick_1);
             // 
             // LvlCount
@@ -83,7 +87,7 @@
             // ScoreTxt
             // 
             this.ScoreTxt.Enabled = false;
-            this.ScoreTxt.Location = new System.Drawing.Point(603, 124);
+            this.ScoreTxt.Location = new System.Drawing.Point(603, 183);
             this.ScoreTxt.Name = "ScoreTxt";
             this.ScoreTxt.Size = new System.Drawing.Size(109, 20);
             this.ScoreTxt.TabIndex = 3;
@@ -95,14 +99,14 @@
             this.ScoreCount.AutoSize = true;
             this.ScoreCount.Location = new System.Drawing.Point(600, 108);
             this.ScoreCount.Name = "ScoreCount";
-            this.ScoreCount.Size = new System.Drawing.Size(35, 13);
+            this.ScoreCount.Size = new System.Drawing.Size(77, 13);
             this.ScoreCount.TabIndex = 4;
-            this.ScoreCount.Text = "Score";
+            this.ScoreCount.Text = "Level Progress";
             // 
             // LvsTxt
             // 
             this.LvsTxt.Enabled = false;
-            this.LvsTxt.Location = new System.Drawing.Point(603, 188);
+            this.LvsTxt.Location = new System.Drawing.Point(603, 239);
             this.LvsTxt.Name = "LvsTxt";
             this.LvsTxt.Size = new System.Drawing.Size(109, 20);
             this.LvsTxt.TabIndex = 5;
@@ -112,46 +116,52 @@
             // LvsCount
             // 
             this.LvsCount.AutoSize = true;
-            this.LvsCount.Location = new System.Drawing.Point(600, 172);
+            this.LvsCount.Location = new System.Drawing.Point(600, 223);
             this.LvsCount.Name = "LvsCount";
             this.LvsCount.Size = new System.Drawing.Size(32, 13);
             this.LvsCount.TabIndex = 6;
             this.LvsCount.Text = "Lives";
             // 
-            // StartGame
+            // levelprogress
             // 
-            this.StartGame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.StartGame.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.StartGame.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StartGame.ForeColor = System.Drawing.Color.White;
-            this.StartGame.Location = new System.Drawing.Point(12, 437);
-            this.StartGame.Name = "StartGame";
-            this.StartGame.Size = new System.Drawing.Size(112, 23);
-            this.StartGame.TabIndex = 7;
-            this.StartGame.Text = "Start Game";
-            this.StartGame.UseVisualStyleBackColor = false;
+            this.levelprogress.BackColor = System.Drawing.Color.Black;
+            this.levelprogress.Cursor = System.Windows.Forms.Cursors.Default;
+            this.levelprogress.ForeColor = System.Drawing.Color.Black;
+            this.levelprogress.Location = new System.Drawing.Point(603, 124);
+            this.levelprogress.Maximum = 25;
+            this.levelprogress.Name = "levelprogress";
+            this.levelprogress.Size = new System.Drawing.Size(109, 23);
+            this.levelprogress.Step = 25;
+            this.levelprogress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.levelprogress.TabIndex = 7;
             // 
-            // StopGame
+            // label1
             // 
-            this.StopGame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.StopGame.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.StopGame.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StopGame.ForeColor = System.Drawing.Color.White;
-            this.StopGame.Location = new System.Drawing.Point(163, 437);
-            this.StopGame.Name = "StopGame";
-            this.StopGame.Size = new System.Drawing.Size(112, 23);
-            this.StopGame.TabIndex = 8;
-            this.StopGame.Text = "Stop Game";
-            this.StopGame.UseVisualStyleBackColor = false;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(600, 167);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Score";
+            // 
+            // BottleTimer
+            // 
+            this.BottleTimer.Tick += new System.EventHandler(this.BottleTimer_Tick_1);
+            // 
+            // BottleTimeWait
+            // 
+            this.BottleTimeWait.Interval = 15000;
+            this.BottleTimeWait.Tick += new System.EventHandler(this.BottleTimeWait_Tick);
             // 
             // FrmAssessment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(737, 482);
-            this.Controls.Add(this.StopGame);
-            this.Controls.Add(this.StartGame);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.levelprogress);
             this.Controls.Add(this.LvsCount);
             this.Controls.Add(this.LvsTxt);
             this.Controls.Add(this.ScoreCount);
@@ -180,8 +190,10 @@
         private System.Windows.Forms.Label ScoreCount;
         private System.Windows.Forms.TextBox LvsTxt;
         private System.Windows.Forms.Label LvsCount;
-        private System.Windows.Forms.Button StartGame;
-        private System.Windows.Forms.Button StopGame;
+        private System.Windows.Forms.ProgressBar levelprogress;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer BottleTimer;
+        private System.Windows.Forms.Timer BottleTimeWait;
     }
 }
 
