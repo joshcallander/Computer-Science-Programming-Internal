@@ -66,20 +66,22 @@
             this.PnlGame.Controls.Add(this.LblUsername);
             this.PnlGame.Controls.Add(this.TbUsername);
             this.PnlGame.Controls.Add(this.LblInstructions);
+            this.PnlGame.Controls.Add(this.LblWelcome);
             this.PnlGame.Cursor = System.Windows.Forms.Cursors.Default;
             this.PnlGame.Location = new System.Drawing.Point(2, 46);
             this.PnlGame.Name = "PnlGame";
-            this.PnlGame.Size = new System.Drawing.Size(579, 376);
+            this.PnlGame.Size = new System.Drawing.Size(579, 362);
             this.PnlGame.TabIndex = 0;
             this.PnlGame.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlGame_Paint);
             // 
             // LblUsername
             // 
             this.LblUsername.AutoSize = true;
-            this.LblUsername.BackColor = System.Drawing.Color.White;
-            this.LblUsername.Location = new System.Drawing.Point(285, 17);
+            this.LblUsername.BackColor = System.Drawing.Color.Transparent;
+            this.LblUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblUsername.Location = new System.Drawing.Point(178, 114);
             this.LblUsername.Name = "LblUsername";
-            this.LblUsername.Size = new System.Drawing.Size(86, 13);
+            this.LblUsername.Size = new System.Drawing.Size(130, 20);
             this.LblUsername.TabIndex = 15;
             this.LblUsername.Text = "Enter Username:";
             // 
@@ -88,7 +90,7 @@
             this.TbUsername.AccessibleDescription = "Enter username";
             this.TbUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TbUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TbUsername.Location = new System.Drawing.Point(288, 38);
+            this.TbUsername.Location = new System.Drawing.Point(182, 137);
             this.TbUsername.MaxLength = 10;
             this.TbUsername.Name = "TbUsername";
             this.TbUsername.Size = new System.Drawing.Size(195, 21);
@@ -100,7 +102,7 @@
             this.LblInstructions.AutoSize = true;
             this.LblInstructions.BackColor = System.Drawing.Color.White;
             this.LblInstructions.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblInstructions.Location = new System.Drawing.Point(188, 62);
+            this.LblInstructions.Location = new System.Drawing.Point(78, 204);
             this.LblInstructions.Name = "LblInstructions";
             this.LblInstructions.Size = new System.Drawing.Size(407, 126);
             this.LblInstructions.TabIndex = 12;
@@ -110,10 +112,11 @@
             // LblWelcome
             // 
             this.LblWelcome.AutoSize = true;
-            this.LblWelcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 23.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblWelcome.Location = new System.Drawing.Point(111, 9);
+            this.LblWelcome.BackColor = System.Drawing.Color.Transparent;
+            this.LblWelcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblWelcome.Location = new System.Drawing.Point(50, 44);
             this.LblWelcome.Name = "LblWelcome";
-            this.LblWelcome.Size = new System.Drawing.Size(542, 35);
+            this.LblWelcome.Size = new System.Drawing.Size(480, 31);
             this.LblWelcome.TabIndex = 9;
             this.LblWelcome.Text = "Welcome To Josh\'s Amazing Game!";
             this.LblWelcome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -270,7 +273,6 @@
             this.Controls.Add(this.LblName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.levelprogress);
-            this.Controls.Add(this.LblWelcome);
             this.Controls.Add(this.LvsCount);
             this.Controls.Add(this.LvsTxt);
             this.Controls.Add(this.ScoreCount);

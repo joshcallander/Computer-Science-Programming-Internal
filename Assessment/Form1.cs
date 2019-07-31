@@ -33,17 +33,16 @@ namespace Assessment
         int bottleSpeed = 17;
         int score = 0;
         int level = 1;
-        int lives = 300;
+        int lives = 0;
         int IfButtonClick = 0;
 
         int usermamevalid = 0;
-        int DifficultyLevel = 0;
 
         bool left, right, up, down;
 
         Random speed = new Random();
 
-        Random xValue = new Random();
+        Random yValue = new Random();
         int randThing = 0;
 
 
@@ -55,8 +54,8 @@ namespace Assessment
 
             surferRectangle = new Rectangle(x2, y2, 30, 30);//surfers's rectangle	
 
-            randThing = xValue.Next(20, 500);
-            bottleRectangle = new Rectangle(randThing, -30, 30, 30);//surfers's rectangle	
+            randThing = yValue.Next(20, 100);
+            bottleRectangle = new Rectangle(-30, randThing, 30, 30);//bottle rectangle	
 
 
             //position the sharks
@@ -64,7 +63,7 @@ namespace Assessment
             for (int i = 0; i <= 4; i++)
             {
                 sharksRectangle[i] = new Rectangle(y, x + 70 * i, 35, 35);
-                sharkSpeed[i] = speed.Next(5, 10);//each planet has a random speed
+                sharkSpeed[i] = speed.Next(5, 10); //each shark has a random speed
             }
         }
 
@@ -219,26 +218,26 @@ namespace Assessment
 
         private void BottleTimer_Tick_1(object sender, EventArgs e)
         {
-                bottleRectangle.Y += bottleSpeed;
+                bottleRectangle.X += bottleSpeed;
                 //if spaceship collides with any planet lose a life and move planet to the top of the panel
                 if (bottleRectangle.IntersectsWith(surferRectangle))
                 {
-                    Random randXValue = new Random();
-                    int xValueInt = 0;
-                    xValueInt = randXValue.Next(20, 500);
-                    bottleRectangle.Y = -30;
-                    bottleRectangle.X = xValueInt;
+                    Random RandYValue = new Random();
+                    int yValueInt = 0;
+                    yValueInt = RandYValue.Next(20, 500);
+                    bottleRectangle.X = -30;
+                    bottleRectangle.Y = yValueInt;
 
                 BottleTimer.Enabled = false;
             }
 
-                if (bottleRectangle.Y > PnlGame.Height)
+                if (bottleRectangle.X > PnlGame.Height)
                 {
-                Random randXValue = new Random();
-                int xValueInt = 0;
-                xValueInt = randXValue.Next(20, 500);
-                bottleRectangle.Y = -30;
-                bottleRectangle.X = xValueInt;
+                Random RandYValue = new Random();
+                int yValueInt = 0;
+                yValueInt = RandYValue.Next(20, 500);
+                bottleRectangle.X = -30;
+                bottleRectangle.Y = yValueInt;
 
                 BottleTimer.Enabled = false;
             }
@@ -260,6 +259,13 @@ namespace Assessment
         {
             string context = TbUsername.Text;
             bool isletter = true;
+
+            if (context == "")
+            {
+                // empty error
+                usermamevalid = 1;
+            }
+
             //for loop checks for letters as characters are entered
             for (int i = 0; i < context.Length; i++)
             {
@@ -290,8 +296,7 @@ namespace Assessment
         {
             if (usermamevalid == 0)
             {
-                DifficultyLevel = 1;
-
+                TbUsername.Enabled = false;
                 LvlCount.Visible = true;
                 LvlTxt.Visible = true;
                 ScoreCount.Visible = true;
@@ -308,6 +313,14 @@ namespace Assessment
 
                 LblUsername.Visible = false;
 
+                BtnHard.Visible = false;
+                BtnMedium.Visible = false;
+                BtnEasy.Visible = false;
+
+                BtnHard.Enabled = false;
+                BtnMedium.Enabled = false;
+                BtnEasy.Enabled = false;
+
                 IfButtonClick = 1;
 
                 TmrShark.Enabled = true;
@@ -316,6 +329,9 @@ namespace Assessment
                 BottleTimeWait.Enabled = true;
 
                 PnlGame.Width = 579;
+
+                lives = 5;
+                LvsTxt.Text = lives.ToString();
 
                 LblName.Text = "Welcome " + TbUsername.Text;
             }
@@ -325,8 +341,8 @@ namespace Assessment
         {
             if (usermamevalid == 0)
             {
-                DifficultyLevel = 2;
 
+                TbUsername.Enabled = false;
                 LvlCount.Visible = true;
                 LvlTxt.Visible = true;
                 ScoreCount.Visible = true;
@@ -343,6 +359,14 @@ namespace Assessment
 
                 LblUsername.Visible = false;
 
+                BtnHard.Visible = false;
+                BtnMedium.Visible = false;
+                BtnEasy.Visible = false;
+
+                BtnHard.Enabled = false;
+                BtnMedium.Enabled = false;
+                BtnEasy.Enabled = false;
+
                 IfButtonClick = 1;
 
                 TmrShark.Enabled = true;
@@ -351,6 +375,9 @@ namespace Assessment
                 BottleTimeWait.Enabled = true;
 
                 PnlGame.Width = 579;
+
+                lives = 3;
+                LvsTxt.Text = lives.ToString();
 
                 LblName.Text = "Welcome " + TbUsername.Text;
             }
@@ -360,8 +387,8 @@ namespace Assessment
         {
             if (usermamevalid == 0)
             {
-                DifficultyLevel = 3;
 
+                TbUsername.Enabled = false;
                 LvlCount.Visible = true;
                 LvlTxt.Visible = true;
                 ScoreCount.Visible = true;
@@ -378,6 +405,14 @@ namespace Assessment
 
                 LblUsername.Visible = false;
 
+                BtnHard.Visible = false;
+                BtnMedium.Visible = false;
+                BtnEasy.Visible = false;
+
+                BtnHard.Enabled = false;
+                BtnMedium.Enabled = false;
+                BtnEasy.Enabled = false;
+
                 IfButtonClick = 1;
 
                 TmrShark.Enabled = true;
@@ -385,7 +420,9 @@ namespace Assessment
                 BottleTimer.Enabled = true;
                 BottleTimeWait.Enabled = true;
 
-                PnlGame.Width = 579;
+                lives = 1;
+
+                LvsTxt.Text = lives.ToString();
 
                 LblName.Text = "Welcome " + TbUsername.Text;
             }
@@ -403,16 +440,12 @@ namespace Assessment
                 g.DrawImage(bottle, bottleRectangle);
 
                 //use the DrawImage method to draw the planet on the panel
-                for (int i = 0; i <= 7; i++)
+                for (int i = 0; i <= 4; i++)
                 {
                     g.DrawImage(shark, sharksRectangle[i]);
                 }
             }
         }
-
-
-
-
 
         //the CheckLives method will stop the planets and spaceship moving if there are no lives left
         // and a game over message will be displayed  
@@ -424,7 +457,7 @@ namespace Assessment
                 TmrSurfer.Enabled = false;
                 BottleTimer.Enabled = false;
                 BottleTimeWait.Enabled = false;
-                MessageBox.Show("Game Over!! You reached level " + level + "!");
+                MessageBox.Show("Game Over!! You reached level " + level + ", score " + score + "!");
                 this.Close();
             }
         }
@@ -524,7 +557,6 @@ namespace Assessment
             BottleTimer.Enabled = false;
             BottleTimeWait.Enabled = true;
 
-            PnlGame.Width = 753;
         }
 
 
