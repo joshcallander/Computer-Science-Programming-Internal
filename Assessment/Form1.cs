@@ -24,13 +24,13 @@ namespace Assessment
         int y2 = 50, x2 = 290; //starting position of surfer
 
         //Load our two images from the bin\debug folder
-        Image surfer = Image.FromFile(Application.StartupPath + @"\surfer.jpg");
-        Image shark = Image.FromFile(Application.StartupPath + @"\shark.jpg");
+        Image surfer = Image.FromFile(Application.StartupPath + @"\Surfer.png");
+        Image shark = Image.FromFile(Application.StartupPath + @"\Shark.png");
 
-        Image bottle = Image.FromFile(Application.StartupPath + @"\bottle.jpg");
+        Image bottle = Image.FromFile(Application.StartupPath + @"\Bottle.png");
 
         int[] sharkSpeed = new int[5];
-        int bottleSpeed = 17;
+        int bottleSpeed = 25;
         int score = 0;
         int level = 1;
         int lives = 0;
@@ -52,7 +52,7 @@ namespace Assessment
 
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, PnlGame, new object[] { true });
 
-            surferRectangle = new Rectangle(x2, y2, 30, 30);//surfers's rectangle	
+            surferRectangle = new Rectangle(x2, y2, 50, 40);//surfers's rectangle	
 
             randThing = yValue.Next(20, 100);
             bottleRectangle = new Rectangle(-30, randThing, 30, 30);//bottle rectangle	
@@ -62,7 +62,7 @@ namespace Assessment
 
             for (int i = 0; i <= 4; i++)
             {
-                sharksRectangle[i] = new Rectangle(y, x + 70 * i, 35, 35);
+                sharksRectangle[i] = new Rectangle(y, x + 70 * i, 45, 40);
                 sharkSpeed[i] = speed.Next(5, 10); //each shark has a random speed
             }
         }
@@ -85,133 +85,135 @@ namespace Assessment
 
         private void TmrShark_Tick_1(object sender, EventArgs e)
         {
-            for (int i = 0; i <= 4; i++)
-            {
-                sharksRectangle[i].X += sharkSpeed[i];
-                //if spaceship collides with any planet lose a life and move planet to the top of the panel
-                if (sharksRectangle[i].IntersectsWith(surferRectangle))
-                {
-                    sharksRectangle[i].X = 25;
-                    lives -= 1; // reduce lives by 1
-
-                    //display the number of lives on the form
-                    LvsTxt.Text = lives.ToString();
-                    CheckLives();
-                }
-                if (sharksRectangle[i].X > PnlGame.Height)
-                {
-                    score += 1; //add 1 to score
-                    sharksRectangle[i].X = 25;
-
-                    ScoreTxt.Text = score.ToString();
-
-                    levelprogress.Value += 1;
-
-                    // Set the Step property to a value of 1 to represent each file being copied.
-                    levelprogress.Step += 1;
-
-                    CheckScore();
-                }
-
-                PnlGame.Invalidate();
-            }
-
-            if (level == 1)
+            if (IfButtonClick == 1)
             {
                 for (int i = 0; i <= 4; i++)
-                {                    
+                {
+                    sharksRectangle[i].X += sharkSpeed[i];
+                    //if spaceship collides with any planet lose a life and move planet to the top of the panel
+                    if (sharksRectangle[i].IntersectsWith(surferRectangle))
+                    {
+                        sharksRectangle[i].X = 20;
+                        lives -= 1; // reduce lives by 1
+
+                        //display the number of lives on the form
+                        LvsTxt.Text = lives.ToString();
+                        CheckLives();
+                    }
+                    if (sharksRectangle[i].X > PnlGame.Width)
+                    {
+                        score += 1; //add 1 to score
+                        sharksRectangle[i].X = 25;
+
+                        ScoreTxt.Text = score.ToString();
+
+                        levelprogress.Value += 1;
+
+                        // Set the Step property to a value of 1 to represent each file being copied.
+                        levelprogress.Step += 1;
+
+                        CheckScore();
+                    }
+
+                    PnlGame.Invalidate();
+                }
+
+                if (level == 1)
+                {
+                    for (int i = 0; i <= 4; i++)
+                    {
                         sharkSpeed[i] = speed.Next(1, 13);// each shark has a random speed
+                    }
+
                 }
 
-            }
-
-            if (level == 2)
-            {
-                for (int i = 0; i <= 4; i++)
+                if (level == 2)
                 {
-                    sharkSpeed[i] = speed.Next(8, 13);// each shark has a random speed
+                    for (int i = 0; i <= 4; i++)
+                    {
+                        sharkSpeed[i] = speed.Next(8, 13);// each shark has a random speed
+                    }
+
                 }
 
-            }
 
-
-            if (level == 3)
-            {
-                for (int i = 0; i <= 4; i++)
+                if (level == 3)
                 {
-                    sharkSpeed[i] = speed.Next(15, 20);// each shark has a random speed
+                    for (int i = 0; i <= 4; i++)
+                    {
+                        sharkSpeed[i] = speed.Next(15, 20);// each shark has a random speed
+                    }
+
                 }
 
-            }
 
 
-
-            if (level == 4)
-            {
-                for (int i = 0; i <= 4; i++)
+                if (level == 4)
                 {
-                    sharkSpeed[i] = speed.Next(20, 22);// each shark has a random speed
+                    for (int i = 0; i <= 4; i++)
+                    {
+                        sharkSpeed[i] = speed.Next(20, 22);// each shark has a random speed
+                    }
+
                 }
 
-            }
 
-
-            if (level == 5)
-            {
-                for (int i = 0; i <= 4; i++)
+                if (level == 5)
                 {
-                    sharkSpeed[i] = speed.Next(20, 22);// each shark has a random speed
+                    for (int i = 0; i <= 4; i++)
+                    {
+                        sharkSpeed[i] = speed.Next(20, 22);// each shark has a random speed
+                    }
+
                 }
 
-            }
-
-            if (level == 6)
-            {
-                for (int i = 0; i <= 4; i++)
+                if (level == 6)
                 {
-                    sharkSpeed[i] = speed.Next(21, 24);// each shark has a random speed
+                    for (int i = 0; i <= 4; i++)
+                    {
+                        sharkSpeed[i] = speed.Next(21, 24);// each shark has a random speed
+                    }
+
                 }
 
-            }
-
-            if (level == 7)
-            {
-                for (int i = 0; i <= 4; i++)
+                if (level == 7)
                 {
-                    sharkSpeed[i] = speed.Next(21, 24);// each shark has a random speed
+                    for (int i = 0; i <= 4; i++)
+                    {
+                        sharkSpeed[i] = speed.Next(21, 24);// each shark has a random speed
+                    }
+
                 }
 
-            }
-
-            if (level == 8)
-            {
-                for (int i = 0; i <= 4; i++)
+                if (level == 8)
                 {
-                    sharkSpeed[i] = speed.Next(21, 24);// each shark has a random speed
+                    for (int i = 0; i <= 4; i++)
+                    {
+                        sharkSpeed[i] = speed.Next(21, 24);// each shark has a random speed
+                    }
+
                 }
 
-            }
-
-            if (level == 9)
-            {
-                for (int i = 0; i <= 4; i++)
+                if (level == 9)
                 {
-                    sharkSpeed[i] = speed.Next(25, 30);// each shark has a random speed
+                    for (int i = 0; i <= 4; i++)
+                    {
+                        sharkSpeed[i] = speed.Next(25, 30);// each shark has a random speed
+                    }
+
                 }
 
-            }
-
-            if (level > 9)
-            {
-                for (int i = 0; i <= 4; i++)
+                if (level > 9)
                 {
-                    sharkSpeed[i] = speed.Next(25, 30);// each shark has a random speed
+                    for (int i = 0; i <= 4; i++)
+                    {
+                        sharkSpeed[i] = speed.Next(25, 30);// each shark has a random speed
+                    }
                 }
+
+
+
             }
-
-
-
-
         }
 
 
@@ -228,10 +230,28 @@ namespace Assessment
                     bottleRectangle.X = -30;
                     bottleRectangle.Y = yValueInt;
 
-                BottleTimer.Enabled = false;
-            }
+                    BottleTimer.Enabled = false;
 
-                if (bottleRectangle.X > PnlGame.Height)
+                    Random BottlePrize = new Random();
+                    int BottlePrizeNumber = BottlePrize.Next(1, 11);  // creates a number between 1 and 10
+
+                    if (BottlePrizeNumber == '1')
+                    {
+                        // add one to lives
+                    }
+
+                    if (BottlePrizeNumber == '2')
+                    {
+                        // add one to lives
+                    }
+
+                    if (BottlePrizeNumber == '3')
+                    {
+                        // remove one from lives
+                    }
+                }
+
+                if (bottleRectangle.X > PnlGame.Width)
                 {
                 Random RandYValue = new Random();
                 int yValueInt = 0;
@@ -253,6 +273,7 @@ namespace Assessment
         private void LblWelcome_Click(object sender, EventArgs e)
         {
 
+
         }
 
         private void TbUsername_TextChanged(object sender, EventArgs e)
@@ -266,6 +287,11 @@ namespace Assessment
                 usermamevalid = 1;
             }
 
+            else
+            {
+                usermamevalid = 0;
+            }
+
             //for loop checks for letters as characters are entered
             for (int i = 0; i < context.Length; i++)
             {
@@ -275,6 +301,12 @@ namespace Assessment
                     usermamevalid = 1;
                     break; // exit the for loop
 
+                }
+
+                else
+                {
+                    usermamevalid = 0;
+                    break; // exit the for loop
                 }
 
             }
@@ -287,6 +319,11 @@ namespace Assessment
                 TbUsername.Focus();
 
                 usermamevalid = 1;
+            }
+
+            else
+            {
+                usermamevalid = 0;
             }
 
         }
@@ -495,7 +532,7 @@ namespace Assessment
                 }
                 else
                 {
-                    surferRectangle.X -= 5; //else move 5 to the left
+                    surferRectangle.X -= 9; //else move 5 to the left
                 }
             }
             if (right) // if right arrow key pressed
@@ -506,7 +543,7 @@ namespace Assessment
                 }
                 else
                 {
-                    surferRectangle.X += 5;
+                    surferRectangle.X += 9;
                 }
 
             }
@@ -519,7 +556,7 @@ namespace Assessment
                 }
                 else
                 {
-                    surferRectangle.Y -= 5;
+                    surferRectangle.Y -= 9;
                 }
             }
 
@@ -531,7 +568,7 @@ namespace Assessment
                 }
                 else
                 {
-                    surferRectangle.Y += 5;
+                    surferRectangle.Y += 9;
                 }
             }
         }

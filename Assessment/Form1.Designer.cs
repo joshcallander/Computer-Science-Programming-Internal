@@ -61,7 +61,6 @@
             // PnlGame
             // 
             this.PnlGame.BackColor = System.Drawing.Color.White;
-            this.PnlGame.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PnlGame.BackgroundImage")));
             this.PnlGame.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PnlGame.Controls.Add(this.LblUsername);
             this.PnlGame.Controls.Add(this.TbUsername);
@@ -79,7 +78,7 @@
             this.LblUsername.AutoSize = true;
             this.LblUsername.BackColor = System.Drawing.Color.Transparent;
             this.LblUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblUsername.Location = new System.Drawing.Point(178, 114);
+            this.LblUsername.Location = new System.Drawing.Point(178, 93);
             this.LblUsername.Name = "LblUsername";
             this.LblUsername.Size = new System.Drawing.Size(130, 20);
             this.LblUsername.TabIndex = 15;
@@ -90,7 +89,7 @@
             this.TbUsername.AccessibleDescription = "Enter username";
             this.TbUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TbUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TbUsername.Location = new System.Drawing.Point(182, 137);
+            this.TbUsername.Location = new System.Drawing.Point(182, 116);
             this.TbUsername.MaxLength = 10;
             this.TbUsername.Name = "TbUsername";
             this.TbUsername.Size = new System.Drawing.Size(195, 21);
@@ -102,9 +101,9 @@
             this.LblInstructions.AutoSize = true;
             this.LblInstructions.BackColor = System.Drawing.Color.White;
             this.LblInstructions.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblInstructions.Location = new System.Drawing.Point(78, 204);
+            this.LblInstructions.Location = new System.Drawing.Point(78, 161);
             this.LblInstructions.Name = "LblInstructions";
-            this.LblInstructions.Size = new System.Drawing.Size(407, 126);
+            this.LblInstructions.Size = new System.Drawing.Size(407, 180);
             this.LblInstructions.TabIndex = 12;
             this.LblInstructions.Text = resources.GetString("LblInstructions.Text");
             this.LblInstructions.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -114,11 +113,11 @@
             this.LblWelcome.AutoSize = true;
             this.LblWelcome.BackColor = System.Drawing.Color.Transparent;
             this.LblWelcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblWelcome.Location = new System.Drawing.Point(50, 44);
+            this.LblWelcome.Location = new System.Drawing.Point(102, 44);
             this.LblWelcome.Name = "LblWelcome";
-            this.LblWelcome.Size = new System.Drawing.Size(480, 31);
+            this.LblWelcome.Size = new System.Drawing.Size(360, 31);
             this.LblWelcome.TabIndex = 9;
-            this.LblWelcome.Text = "Welcome To Josh\'s Amazing Game!";
+            this.LblWelcome.Text = "Welcome To Josh\'s Game!";
             this.LblWelcome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LblWelcome.Click += new System.EventHandler(this.LblWelcome_Click);
             // 
@@ -217,10 +216,10 @@
             // LblName
             // 
             this.LblName.AutoSize = true;
-            this.LblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LblName.Location = new System.Drawing.Point(12, 9);
             this.LblName.Name = "LblName";
-            this.LblName.Size = new System.Drawing.Size(138, 20);
+            this.LblName.Size = new System.Drawing.Size(162, 24);
             this.LblName.TabIndex = 10;
             this.LblName.Text = "Username Display";
             // 
@@ -229,7 +228,7 @@
             this.BtnEasy.BackColor = System.Drawing.Color.Transparent;
             this.BtnEasy.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnEasy.BackgroundImage")));
             this.BtnEasy.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnEasy.Location = new System.Drawing.Point(2, 414);
+            this.BtnEasy.Location = new System.Drawing.Point(619, 46);
             this.BtnEasy.Name = "BtnEasy";
             this.BtnEasy.Size = new System.Drawing.Size(75, 67);
             this.BtnEasy.TabIndex = 11;
@@ -241,7 +240,7 @@
             this.BtnMedium.BackColor = System.Drawing.Color.Transparent;
             this.BtnMedium.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnMedium.BackgroundImage")));
             this.BtnMedium.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnMedium.Location = new System.Drawing.Point(83, 414);
+            this.BtnMedium.Location = new System.Drawing.Point(619, 153);
             this.BtnMedium.Name = "BtnMedium";
             this.BtnMedium.Size = new System.Drawing.Size(75, 67);
             this.BtnMedium.TabIndex = 12;
@@ -253,7 +252,7 @@
             this.BtnHard.BackColor = System.Drawing.Color.Transparent;
             this.BtnHard.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnHard.BackgroundImage")));
             this.BtnHard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnHard.Location = new System.Drawing.Point(164, 414);
+            this.BtnHard.Location = new System.Drawing.Point(619, 250);
             this.BtnHard.Name = "BtnHard";
             this.BtnHard.Size = new System.Drawing.Size(75, 67);
             this.BtnHard.TabIndex = 13;
@@ -264,7 +263,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.BackColor = System.Drawing.Color.DimGray;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(737, 482);
             this.Controls.Add(this.BtnHard);
