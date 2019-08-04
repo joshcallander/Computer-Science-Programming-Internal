@@ -51,6 +51,9 @@
             this.BtnEasy = new System.Windows.Forms.Button();
             this.BtnMedium = new System.Windows.Forms.Button();
             this.BtnHard = new System.Windows.Forms.Button();
+            this.TmrCountdown = new System.Windows.Forms.Timer(this.components);
+            this.LblGameStart = new System.Windows.Forms.Label();
+            this.LblToStart = new System.Windows.Forms.Label();
             this.PnlGame.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,6 +65,8 @@
             // 
             this.PnlGame.BackColor = System.Drawing.Color.White;
             this.PnlGame.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PnlGame.Controls.Add(this.LblToStart);
+            this.PnlGame.Controls.Add(this.LblGameStart);
             this.PnlGame.Controls.Add(this.LblUsername);
             this.PnlGame.Controls.Add(this.TbUsername);
             this.PnlGame.Controls.Add(this.LblInstructions);
@@ -194,6 +199,7 @@
             this.levelprogress.Step = 25;
             this.levelprogress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.levelprogress.TabIndex = 7;
+            this.levelprogress.Click += new System.EventHandler(this.levelprogress_Click);
             // 
             // label1
             // 
@@ -259,6 +265,32 @@
             this.BtnHard.UseVisualStyleBackColor = false;
             this.BtnHard.Click += new System.EventHandler(this.BtnHard_Click);
             // 
+            // TmrCountdown
+            // 
+            this.TmrCountdown.Interval = 1000;
+            this.TmrCountdown.Tick += new System.EventHandler(this.TmrCountdown_Tick);
+            // 
+            // LblGameStart
+            // 
+            this.LblGameStart.AutoSize = true;
+            this.LblGameStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblGameStart.Location = new System.Drawing.Point(207, 112);
+            this.LblGameStart.Name = "LblGameStart";
+            this.LblGameStart.Size = new System.Drawing.Size(182, 20);
+            this.LblGameStart.TabIndex = 16;
+            this.LblGameStart.Text = "Seconds till game starts:";
+            this.LblGameStart.Visible = false;
+            // 
+            // LblToStart
+            // 
+            this.LblToStart.AutoSize = true;
+            this.LblToStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblToStart.Location = new System.Drawing.Point(272, 144);
+            this.LblToStart.Name = "LblToStart";
+            this.LblToStart.Size = new System.Drawing.Size(31, 33);
+            this.LblToStart.TabIndex = 17;
+            this.LblToStart.Text = "3";
+            // 
             // FrmAssessment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -314,6 +346,9 @@
         private System.Windows.Forms.Button BtnEasy;
         private System.Windows.Forms.Button BtnMedium;
         private System.Windows.Forms.Button BtnHard;
+        private System.Windows.Forms.Timer TmrCountdown;
+        private System.Windows.Forms.Label LblToStart;
+        private System.Windows.Forms.Label LblGameStart;
     }
 }
 

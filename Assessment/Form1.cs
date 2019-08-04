@@ -34,6 +34,7 @@ namespace Assessment
         int score = 0;
         int level = 1;
         int lives = 0;
+        int timercount = 3;
         int IfButtonClick = 0;
 
         int usermamevalid = 0;
@@ -343,6 +344,9 @@ namespace Assessment
         {
             if (usermamevalid == 0)
             {
+                LblToStart.Visible = true;
+                LblGameStart.Visible = true;
+
                 TbUsername.Enabled = false;
                 LvlCount.Visible = true;
                 LvlTxt.Visible = true;
@@ -370,10 +374,13 @@ namespace Assessment
 
                 IfButtonClick = 1;
 
-                TmrShark.Enabled = true;
-                TmrSurfer.Enabled = true;
-                BottleTimer.Enabled = true;
-                BottleTimeWait.Enabled = true;
+                TmrShark.Enabled = false;
+                TmrSurfer.Enabled = false;
+                BottleTimer.Enabled = false;
+                BottleTimeWait.Enabled = false;
+
+                TmrCountdown.Start();
+                
 
                 PnlGame.Width = 579;
 
@@ -388,6 +395,8 @@ namespace Assessment
         {
             if (usermamevalid == 0)
             {
+                LblToStart.Visible = true;
+                LblGameStart.Visible = true;
 
                 TbUsername.Enabled = false;
                 LvlCount.Visible = true;
@@ -416,15 +425,17 @@ namespace Assessment
 
                 IfButtonClick = 1;
 
-                TmrShark.Enabled = true;
-                TmrSurfer.Enabled = true;
-                BottleTimer.Enabled = true;
-                BottleTimeWait.Enabled = true;
+                TmrShark.Enabled = false;
+                TmrSurfer.Enabled = false;
+                BottleTimer.Enabled = false;
+                BottleTimeWait.Enabled = false;
 
                 PnlGame.Width = 579;
 
                 lives = 3;
                 LvsTxt.Text = lives.ToString();
+
+                TmrCountdown.Start();
 
                 LblName.Text = "Welcome " + TbUsername.Text;
             }
@@ -434,6 +445,8 @@ namespace Assessment
         {
             if (usermamevalid == 0)
             {
+                LblToStart.Visible = true;
+                LblGameStart.Visible = true;
 
                 TbUsername.Enabled = false;
                 LvlCount.Visible = true;
@@ -462,17 +475,47 @@ namespace Assessment
 
                 IfButtonClick = 1;
 
-                TmrShark.Enabled = true;
-                TmrSurfer.Enabled = true;
-                BottleTimer.Enabled = true;
-                BottleTimeWait.Enabled = true;
+                TmrShark.Enabled = false;
+                TmrSurfer.Enabled = false;
+                BottleTimer.Enabled = false;
+                BottleTimeWait.Enabled = false;
 
                 lives = 1;
 
                 LvsTxt.Text = lives.ToString();
 
+                TmrCountdown.Start();
+
                 LblName.Text = "Welcome " + TbUsername.Text;
             }
+        }
+
+        private void TmrCountdown_Tick(object sender, EventArgs e)
+        {
+            timercount--;
+            LblToStart.Text = timercount.ToString();
+
+            if (timercount == 3)
+            {
+                LblGameStart.Visible = true;
+            }
+
+            if (timercount == 0)
+            {
+                LblToStart.Visible = false;
+                LblGameStart.Visible = false;
+
+                TmrShark.Enabled = true;
+                TmrSurfer.Enabled = true;
+                BottleTimer.Enabled = true;
+                BottleTimeWait.Enabled = true;
+                TmrCountdown.Stop();
+            }
+        }
+
+        private void levelprogress_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void PnlGame_Paint(object sender, PaintEventArgs e)
@@ -603,6 +646,9 @@ namespace Assessment
             TmrSurfer.Enabled = true;
             BottleTimer.Enabled = false;
             BottleTimeWait.Enabled = true;
+
+            LblToStart.Visible = false;
+            LblGameStart.Visible = false;
 
         }
 
