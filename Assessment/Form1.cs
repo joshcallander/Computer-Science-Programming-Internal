@@ -30,7 +30,7 @@ namespace Assessment
         Image bottle = Image.FromFile(Application.StartupPath + @"\Bottle.png");
 
         int[] sharkSpeed = new int[5];
-        int bottleSpeed = 25;
+        int bottleSpeed = 25; // set the speed of the bottle (power-up)
         int score = 0;
         int level = 1;
         int lives = 0;
@@ -233,21 +233,30 @@ namespace Assessment
                     BottleTimer.Enabled = false;
 
                     Random BottlePrize = new Random();
-                    int BottlePrizeNumber = BottlePrize.Next(1, 11);  // creates a number between 1 and 10
+                    int BottlePrizeNumber = BottlePrize.Next(1, 5);  // creates a number between 1 and 10
 
-                    if (BottlePrizeNumber == '1')
+                    if (BottlePrizeNumber == 1)
                     {
-                        // add one to lives
+                        lives++; // add one to lives
+                        LvsTxt.Text = lives.ToString();
                     }
 
-                    if (BottlePrizeNumber == '2')
+                    if (BottlePrizeNumber == 2)
                     {
-                        // add one to lives
+                        lives++; // add one to lives
+                        LvsTxt.Text = lives.ToString();
                     }
 
-                    if (BottlePrizeNumber == '3')
+                    if (BottlePrizeNumber == 3)
                     {
-                        // remove one from lives
+                        lives++; // add one to lives
+                        LvsTxt.Text = lives.ToString();
+                    }
+
+                    if (BottlePrizeNumber == 4)
+                    {
+                        lives--; // add one to lives
+                        LvsTxt.Text = lives.ToString();
                     }
                 }
 
@@ -299,15 +308,16 @@ namespace Assessment
                 {
                     isletter = false;//make isletter false
                     usermamevalid = 1;
-                    break; // exit the for loop
 
                 }
 
                 else
                 {
                     usermamevalid = 0;
-                    break; // exit the for loop
+
                 }
+
+    
 
             }
 
@@ -367,7 +377,7 @@ namespace Assessment
 
                 PnlGame.Width = 579;
 
-                lives = 5;
+                lives = 5; // set to 5
                 LvsTxt.Text = lives.ToString();
 
                 LblName.Text = "Welcome " + TbUsername.Text;

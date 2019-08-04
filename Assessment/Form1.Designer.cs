@@ -90,7 +90,7 @@
             this.TbUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TbUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TbUsername.Location = new System.Drawing.Point(182, 116);
-            this.TbUsername.MaxLength = 10;
+            this.TbUsername.MaxLength = 20;
             this.TbUsername.Name = "TbUsername";
             this.TbUsername.Size = new System.Drawing.Size(195, 21);
             this.TbUsername.TabIndex = 13;
@@ -240,7 +240,7 @@
             this.BtnMedium.BackColor = System.Drawing.Color.Transparent;
             this.BtnMedium.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnMedium.BackgroundImage")));
             this.BtnMedium.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnMedium.Location = new System.Drawing.Point(619, 153);
+            this.BtnMedium.Location = new System.Drawing.Point(619, 136);
             this.BtnMedium.Name = "BtnMedium";
             this.BtnMedium.Size = new System.Drawing.Size(75, 67);
             this.BtnMedium.TabIndex = 12;
@@ -252,7 +252,7 @@
             this.BtnHard.BackColor = System.Drawing.Color.Transparent;
             this.BtnHard.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnHard.BackgroundImage")));
             this.BtnHard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnHard.Location = new System.Drawing.Point(619, 250);
+            this.BtnHard.Location = new System.Drawing.Point(619, 223);
             this.BtnHard.Name = "BtnHard";
             this.BtnHard.Size = new System.Drawing.Size(75, 67);
             this.BtnHard.TabIndex = 13;
