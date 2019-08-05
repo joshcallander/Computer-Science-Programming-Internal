@@ -13,207 +13,161 @@ namespace Assessment
 {
     public partial class FrmAssessment : Form
     {
-        Graphics g; // declare the graphics
-        int y = 25, x = 20;// starting position of planet
+    
+        Graphics g; // Declare the graphics for the game
+        int y = 25, x = 20; // Set the starting position of sharks
+        int y2 = 161, x2 = 520; // Set the starting position of surfer
 
-        //Declare the rectangles to display the sharks and surfer in
+        // Declare the rectangles to display the bottle, sharks and surfer in
         Rectangle surferRectangle;
         Rectangle bottleRectangle;
-        
-        Rectangle[] sharksRectangle = new Rectangle[8];//sharks[0] to sharks[8]
-        int y2 = 50, x2 = 290; //starting position of surfer
+        Rectangle[] sharksRectangle = new Rectangle[5];
 
-        //Load our two images from the bin\debug folder
+        // Load the shark, surfer and bottle images onto the panel from the bin\debug folder
         Image surfer = Image.FromFile(Application.StartupPath + @"\Surfer.png");
         Image shark = Image.FromFile(Application.StartupPath + @"\Shark.png");
-
         Image bottle = Image.FromFile(Application.StartupPath + @"\Bottle.png");
 
+        // Declare the speed of the bottle, and sharks
         int[] sharkSpeed = new int[5];
         int bottleSpeed = 25; // set the speed of the bottle (power-up)
+
+        // Declare the int varibles to to display on the game
         int score = 0;
         int level = 1;
         int lives = 0;
         int timercount = 3;
         int IfButtonClick = 0;
-
         int usermamevalid = 0;
 
+        // Declare the up, down, left and right key press
         bool left, right, up, down;
 
+        // Declare random varibles
         Random speed = new Random();
-
         Random yValue = new Random();
-        int randThing = 0;
-
+        int RandomXValue = 0;
 
         public FrmAssessment()
         {
             InitializeComponent();
-
+            
+            // Add double buffering to stop the game flickering
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, PnlGame, new object[] { true });
 
-            surferRectangle = new Rectangle(x2, y2, 50, 40);//surfers's rectangle	
+            // Declare the rectangles
+            surferRectangle = new Rectangle(x2, y2, 50, 40); // Define the surfers's rectangle	
 
-            randThing = yValue.Next(20, 100);
-            bottleRectangle = new Rectangle(-30, randThing, 30, 30);//bottle rectangle	
+            RandomXValue = yValue.Next(20, 100);
+            bottleRectangle = new Rectangle(-30, RandomXValue, 30, 30);// Define the bottle rectangle	
 
 
-            //position the sharks
-
+            // Position each shark onto the panel using a for loop
             for (int i = 0; i <= 4; i++)
             {
+                // Declare the rectangle to put the shark image in for each shark
                 sharksRectangle[i] = new Rectangle(y, x + 70 * i, 45, 40);
-                sharkSpeed[i] = speed.Next(5, 10); //each shark has a random speed
-            }
-        }
-
-        private void FrmAssessment_KeyUp_1(object sender, KeyEventArgs e)
-        {
-            if (e.KeyData == Keys.Left) { left = false; }
-            if (e.KeyData == Keys.Right) { right = false; }
-            if (e.KeyData == Keys.Up) { up = false; }
-            if (e.KeyData == Keys.Down) { down = false; }
-        }
-
-        private void FrmAssessment_KeyDown_1(object sender, KeyEventArgs e)
-        {
-            if (e.KeyData == Keys.Left) { left = true; }
-            if (e.KeyData == Keys.Right) { right = true; }
-            if (e.KeyData == Keys.Up) { up = true; }
-            if (e.KeyData == Keys.Down) { down = true; }
-        }
-
-        private void TmrShark_Tick_1(object sender, EventArgs e)
-        {
-            if (IfButtonClick == 1)
-            {
-                for (int i = 0; i <= 4; i++)
-                {
-                    sharksRectangle[i].X += sharkSpeed[i];
-                    //if spaceship collides with any planet lose a life and move planet to the top of the panel
-                    if (sharksRectangle[i].IntersectsWith(surferRectangle))
-                    {
-                        sharksRectangle[i].X = 20;
-                        lives -= 1; // reduce lives by 1
-
-                        //display the number of lives on the form
-                        LvsTxt.Text = lives.ToString();
-                        CheckLives();
-                    }
-                    if (sharksRectangle[i].X > PnlGame.Width)
-                    {
-                        score += 1; //add 1 to score
-                        sharksRectangle[i].X = 25;
-
-                        ScoreTxt.Text = score.ToString();
-
-                        levelprogress.Value += 1;
-
-                        // Set the Step property to a value of 1 to represent each file being copied.
-                        levelprogress.Step += 1;
-
-                        CheckScore();
-                    }
-
-                    PnlGame.Invalidate();
-                }
 
                 if (level == 1)
-                {
-                    for (int i = 0; i <= 4; i++)
-                    {
-                        sharkSpeed[i] = speed.Next(1, 13);// each shark has a random speed
-                    }
-
+                { 
+                    sharkSpeed[i] = speed.Next(1, 15); // If the level is 1, then each shark has a random speed between 1 and 15
                 }
 
                 if (level == 2)
                 {
-                    for (int i = 0; i <= 4; i++)
-                    {
-                        sharkSpeed[i] = speed.Next(8, 13);// each shark has a random speed
-                    }
-
+                    sharkSpeed[i] = speed.Next(10, 20); // If the level is 2, then each shark has a random speed between 10 and 20
                 }
 
 
                 if (level == 3)
                 {
-                    for (int i = 0; i <= 4; i++)
-                    {
-                        sharkSpeed[i] = speed.Next(15, 20);// each shark has a random speed
-                    }
-
+                    sharkSpeed[i] = speed.Next(15, 20); // If the level is 3, then each shark has a random speed between 15 and 20
                 }
-
-
 
                 if (level == 4)
                 {
-                    for (int i = 0; i <= 4; i++)
-                    {
-                        sharkSpeed[i] = speed.Next(20, 22);// each shark has a random speed
-                    }
-
+                    sharkSpeed[i] = speed.Next(20, 22); // If the level is 4, then each shark has a random speed between 20 and 22
                 }
-
 
                 if (level == 5)
                 {
-                    for (int i = 0; i <= 4; i++)
-                    {
-                        sharkSpeed[i] = speed.Next(20, 22);// each shark has a random speed
-                    }
-
+                    sharkSpeed[i] = speed.Next(20, 22); // If the level is 5, then each shark has a random speed between 20 and 22
                 }
 
                 if (level == 6)
                 {
-                    for (int i = 0; i <= 4; i++)
-                    {
-                        sharkSpeed[i] = speed.Next(21, 24);// each shark has a random speed
-                    }
-
+                    sharkSpeed[i] = speed.Next(21, 24); // If the level is 6, then each shark has a random speed between 21 and 24
                 }
 
                 if (level == 7)
                 {
-                    for (int i = 0; i <= 4; i++)
-                    {
-                        sharkSpeed[i] = speed.Next(21, 24);// each shark has a random speed
-                    }
-
+                    sharkSpeed[i] = speed.Next(21, 24); // If the level is 7, then each shark has a random speed between 21 and 24
                 }
 
                 if (level == 8)
                 {
-                    for (int i = 0; i <= 4; i++)
-                    {
-                        sharkSpeed[i] = speed.Next(21, 24);// each shark has a random speed
-                    }
-
+                    sharkSpeed[i] = speed.Next(21, 24); // If the level is 8, then each shark has a random speed between 21 and 24
                 }
 
                 if (level == 9)
                 {
-                    for (int i = 0; i <= 4; i++)
-                    {
-                        sharkSpeed[i] = speed.Next(25, 30);// each shark has a random speed
-                    }
-
+                    sharkSpeed[i] = speed.Next(25, 30); // If the level is 9, then each shark has a random speed between 25 and 30
                 }
 
                 if (level > 9)
                 {
-                    for (int i = 0; i <= 4; i++)
-                    {
-                        sharkSpeed[i] = speed.Next(25, 30);// each shark has a random speed
-                    }
+                    sharkSpeed[i] = speed.Next(25, 30); // If the level is greater than 9, then each shark has a random speed between 25 and 30
                 }
+            }
+        }
 
+        private void FrmAssessment_KeyUp_1(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Left) { left = false; } // If the left key is pressed, then disable the surfer left fuction
+            if (e.KeyData == Keys.Right) { right = false; } // If the right key is pressed, then disable the surfer right fuction
+            if (e.KeyData == Keys.Up) { up = false; } // If the up key is pressed, then disable the surfer up fuction
+            if (e.KeyData == Keys.Down) { down = false; } // If the down key is pressed, then disable the surfer down fuction
+        }
 
+        private void FrmAssessment_KeyDown_1(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Left) { left = false; } // If the left key is pressed, then enable the surfer left fuction
+            if (e.KeyData == Keys.Right) { right = false; } // If the right key is pressed, then enable the surfer right fuction
+            if (e.KeyData == Keys.Up) { up = false; } // If the up key is pressed, then enable the surfer up fuction
+            if (e.KeyData == Keys.Down) { down = false; } // If the down key is pressed, then enable the surfer down fuction
+        }
 
+        private void TmrShark_Tick_1(object sender, EventArgs e)
+        {
+            if (IfButtonClick == 1)
+            { // Only run the code if a difficulty button has been pressed
+                for (int i = 0; i <= 4; i++)
+                { // Run the code for each of the 5 sharks
+                    sharksRectangle[i].X += sharkSpeed[i]; // Set each shark to the correct speed
+
+                    if (sharksRectangle[i].IntersectsWith(surferRectangle))
+                    { // If the surfer collides with any shark
+                        sharksRectangle[i].X = 20; // Move the shark back to the begining of the panel
+                        lives -= 1; // Reduce lives count by one
+                        LvsTxt.Text = lives.ToString(); // Display the number of lives remaining on the LvsTxt textbox
+                        CheckLives(); // Initiate the function that checks how many lives the user has
+                    }
+
+                    if (sharksRectangle[i].X > PnlGame.Width)
+                    { // If the shark reaches the end of the panel
+                        score += 1; // Add one point to score count
+                        sharksRectangle[i].X = 25; // Move the shark back to the begining of the panel
+                        ScoreTxt.Text = score.ToString(); // Display the score count on the ScoreTxt textbox
+
+                        // Increase the value/ step the level progressbar by one
+                        levelprogress.Value += 1;
+                        levelprogress.Step += 1;
+
+                        CheckScore(); // Initiate the function that checks the score the user is on and if the level needs increasing
+                    }
+
+                    PnlGame.Invalidate();
+                }
             }
         }
 
@@ -256,7 +210,7 @@ namespace Assessment
 
                     if (BottlePrizeNumber == 4)
                     {
-                        lives--; // add one to lives
+                        lives--; // remove one from lives
                         LvsTxt.Text = lives.ToString();
                     }
                 }
