@@ -159,7 +159,7 @@ namespace Assessment
                         sharksRectangle[i].X = 25; // Move the shark back to the begining of the panel
                         ScoreTxt.Text = score.ToString(); // Display the score count on the ScoreTxt textbox
 
-                        // Increase the value/ step the level progressbar by one
+                        // Increase the value/ step of the level progressbar by one, indicating they have made progress through the level
                         levelprogress.Value += 1;
                         levelprogress.Step += 1;
 
@@ -175,63 +175,64 @@ namespace Assessment
 
         private void BottleTimer_Tick_1(object sender, EventArgs e)
         {
-                bottleRectangle.X += bottleSpeed;
-                //if spaceship collides with any planet lose a life and move planet to the top of the panel
+                bottleRectangle.X += bottleSpeed; // Set the speed of the bottle on timer tick
+                
+                // If the bottle rectangle touches the surfer
                 if (bottleRectangle.IntersectsWith(surferRectangle))
                 {
-                    Random RandYValue = new Random();
-                    int yValueInt = 0;
-                    yValueInt = RandYValue.Next(20, 500);
-                    bottleRectangle.X = -30;
-                    bottleRectangle.Y = yValueInt;
+                    Random RandYValue = new Random(); // Generate a random y value 
+                    int yValueInt = 0; // Generate a intager
+                    yValueInt = RandYValue.Next(20, 500); // Make the y value between 20 and 500 in the panel
+                    bottleRectangle.X = -30; // Move the bottle back to the start of the panel, but of the screen so the user cannot see it
+                    bottleRectangle.Y = yValueInt; // Set the y value of the botttle to the yValueInt varible
 
-                    BottleTimer.Enabled = false;
+                    BottleTimer.Enabled = false; // Disable the bottle timer for another 15 seconds
 
-                    Random BottlePrize = new Random();
-                    int BottlePrizeNumber = BottlePrize.Next(1, 5);  // creates a number between 1 and 10
+                    Random BottlePrize = new Random(); // Genrate a random number
+                    int BottlePrizeNumber = BottlePrize.Next(1, 5);  // Make the random number between 1 and 4
 
                     if (BottlePrizeNumber == 1)
-                    {
-                        lives++; // add one to lives
-                        LvsTxt.Text = lives.ToString();
+                    { // If the random number generated is equal to 1
+                        lives++; // Add one to lives count
+                        LvsTxt.Text = lives.ToString(); // Convert it to a string then dispaly it on the LvsTxt textbox
                     }
 
                     if (BottlePrizeNumber == 2)
                     {
-                        lives++; // add one to lives
-                        LvsTxt.Text = lives.ToString();
+                        lives++; // Add one to lives count
+                        LvsTxt.Text = lives.ToString(); // Convert it to a string then dispaly it on the LvsTxt textbox
                     }
 
                     if (BottlePrizeNumber == 3)
                     {
-                        lives++; // add one to lives
-                        LvsTxt.Text = lives.ToString();
+                        lives++; // Add one to lives count
+                        LvsTxt.Text = lives.ToString(); // Convert it to a string then dispaly it on the LvsTxt textbox
                     }
 
                     if (BottlePrizeNumber == 4)
                     {
-                        lives--; // remove one from lives
-                        LvsTxt.Text = lives.ToString();
+                        lives--; // Remove one from the lives count
+                        LvsTxt.Text = lives.ToString(); // Convert it to a string then dispaly it on the LvsTxt textbox
                     }
                 }
 
                 if (bottleRectangle.X > PnlGame.Width)
-                {
-                Random RandYValue = new Random();
-                int yValueInt = 0;
-                yValueInt = RandYValue.Next(20, 500);
-                bottleRectangle.X = -30;
-                bottleRectangle.Y = yValueInt;
+                { // If the bottle reaches the end of the panel
+                    Random RandYValue = new Random(); // Generate a random y value 
+                    int yValueInt = 0; // Generate a intager
+                    yValueInt = RandYValue.Next(20, 500); // Make the y value between 20 and 500 in the panel
+                    bottleRectangle.X = -30; // Move the bottle back to the start of the panel, but of the screen so the user cannot see it
+                    bottleRectangle.Y = yValueInt; // Set the y value of the botttle to the yValueInt varible
 
-                BottleTimer.Enabled = false;
-            }
+                    BottleTimer.Enabled = false; // Disable the bottle timer for another 15 seconds
+                }
 
         }
 
 
         private void BottleTimeWait_Tick_1(object sender, EventArgs e)
         {
-            BottleTimer.Enabled = true;
+            BottleTimer.Enabled = true; // Once 15 seconds has passed, re-enable the bottle timer to move the bottle
         }
 
         private void LblWelcome_Click(object sender, EventArgs e)
@@ -295,7 +296,7 @@ namespace Assessment
 
 
         private void BtnEasy_Click(object sender, EventArgs e)
-        {
+        { // If the user clicks on the easy difficulty button
             if (usermamevalid == 0)
             {
                 LblToStart.Visible = true;
@@ -346,7 +347,7 @@ namespace Assessment
         }
 
         private void BtnMedium_Click(object sender, EventArgs e)
-        {
+        { // If the user clicks on the medium difficulty button
             if (usermamevalid == 0)
             {
                 LblToStart.Visible = true;
@@ -396,7 +397,7 @@ namespace Assessment
         }
 
         private void BtnHard_Click(object sender, EventArgs e)
-        {
+        { // If the user clicks on the hard difficulty button
             if (usermamevalid == 0)
             {
                 LblToStart.Visible = true;
@@ -491,38 +492,33 @@ namespace Assessment
             }
         }
 
-        //the CheckLives method will stop the planets and spaceship moving if there are no lives left
-        // and a game over message will be displayed  
         private void CheckLives()
-        {
+        { // Initiate the CheckLives method/ function
             if (lives == 0)
-            {
+            { // If the user has no lives left
+                // Disable the timers
                 TmrShark.Enabled = false;
                 TmrSurfer.Enabled = false;
                 BottleTimer.Enabled = false;
                 BottleTimeWait.Enabled = false;
-                MessageBox.Show("Game Over!! You reached level " + level + ", score " + score + "!");
-                this.Close();
+                
+                MessageBox.Show("Game Over!! You reached level " + level + ", score " + score + "!"); // Display the game over message, telling the user their level and score count
+                this.Close(); // Close the form
             }
         }
 
-        //the CheckLives method will stop the planets and spaceship moving if there are no lives left
-        // and a game over message will be displayed  
         private void CheckScore()
-        {
+        { // Initiate the CheckScore method/ function
             if (score % 25 == 0)
-            {
-                level += 1; //add 1 to level
-                LvlTxt.Text = level.ToString();
+            { // If the score is divisible by 25
+                level += 1; // Add one to level count
+                LvlTxt.Text = level.ToString(); // Convert the level to a string, then display it on the LvlTxt textbox
 
-                levelprogress.Value = 0;
+                levelprogress.Value = 0; // Set the levelprogress bar to a value of 0
+                levelprogress.Step = 0; // Set the levelprogress bar to a step of 0
 
-                // Set the Step property to a value of 1 to represent each file being copied.
-                levelprogress.Step = 0;
-
-                score = 0;
-                ScoreTxt.Text = score.ToString();
-
+                score = 0; // Set the score count to 0
+                ScoreTxt.Text = score.ToString(); // Convert the score to a string, then display it on the ScoreTxt textbox
             }
         }
 
