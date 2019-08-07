@@ -32,6 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAssessment));
             this.TmrShark = new System.Windows.Forms.Timer(this.components);
             this.PnlGame = new System.Windows.Forms.Panel();
+            this.LblToStart = new System.Windows.Forms.Label();
+            this.LblGameStart = new System.Windows.Forms.Label();
             this.LblUsername = new System.Windows.Forms.Label();
             this.TbUsername = new System.Windows.Forms.TextBox();
             this.LblInstructions = new System.Windows.Forms.Label();
@@ -52,14 +54,12 @@
             this.BtnMedium = new System.Windows.Forms.Button();
             this.BtnHard = new System.Windows.Forms.Button();
             this.TmrCountdown = new System.Windows.Forms.Timer(this.components);
-            this.LblGameStart = new System.Windows.Forms.Label();
-            this.LblToStart = new System.Windows.Forms.Label();
             this.PnlGame.SuspendLayout();
             this.SuspendLayout();
             // 
             // TmrShark
             // 
-            this.TmrShark.Tick += new System.EventHandler(this.TmrShark_Tick_1);
+            this.TmrShark.Tick += new System.EventHandler(this.TmrShark_Tick);
             // 
             // PnlGame
             // 
@@ -77,6 +77,27 @@
             this.PnlGame.Size = new System.Drawing.Size(579, 362);
             this.PnlGame.TabIndex = 0;
             this.PnlGame.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlGame_Paint);
+            // 
+            // LblToStart
+            // 
+            this.LblToStart.AutoSize = true;
+            this.LblToStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblToStart.Location = new System.Drawing.Point(272, 144);
+            this.LblToStart.Name = "LblToStart";
+            this.LblToStart.Size = new System.Drawing.Size(31, 33);
+            this.LblToStart.TabIndex = 17;
+            this.LblToStart.Text = "3";
+            // 
+            // LblGameStart
+            // 
+            this.LblGameStart.AutoSize = true;
+            this.LblGameStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblGameStart.Location = new System.Drawing.Point(207, 112);
+            this.LblGameStart.Name = "LblGameStart";
+            this.LblGameStart.Size = new System.Drawing.Size(182, 20);
+            this.LblGameStart.TabIndex = 16;
+            this.LblGameStart.Text = "Seconds till game starts:";
+            this.LblGameStart.Visible = false;
             // 
             // LblUsername
             // 
@@ -124,11 +145,10 @@
             this.LblWelcome.TabIndex = 9;
             this.LblWelcome.Text = "Welcome To Josh\'s Game!";
             this.LblWelcome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.LblWelcome.Click += new System.EventHandler(this.LblWelcome_Click);
             // 
             // TmrSurfer
             // 
-            this.TmrSurfer.Tick += new System.EventHandler(this.TmrSurfer_Tick_1);
+            this.TmrSurfer.Tick += new System.EventHandler(this.TmrSurfer_Tick);
             // 
             // LvlCount
             // 
@@ -198,9 +218,7 @@
             this.levelprogress.Size = new System.Drawing.Size(109, 23);
             this.levelprogress.Step = 25;
             this.levelprogress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.levelprogress.TabIndex = 7;
-            this.levelprogress.Click += new System.EventHandler(this.levelprogress_Click);
-            // 
+            this.levelprogress.TabIndex = 7;            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -212,12 +230,12 @@
             // 
             // BottleTimer
             // 
-            this.BottleTimer.Tick += new System.EventHandler(this.BottleTimer_Tick_1);
+            this.BottleTimer.Tick += new System.EventHandler(this.BottleTimer_Tick);
             // 
             // BottleTimeWait
             // 
             this.BottleTimeWait.Interval = 10000;
-            this.BottleTimeWait.Tick += new System.EventHandler(this.BottleTimeWait_Tick_1);
+            this.BottleTimeWait.Tick += new System.EventHandler(this.BottleTimeWait_Tick);
             // 
             // LblName
             // 
@@ -258,7 +276,7 @@
             this.BtnHard.BackColor = System.Drawing.Color.Transparent;
             this.BtnHard.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnHard.BackgroundImage")));
             this.BtnHard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnHard.Location = new System.Drawing.Point(619, 223);
+            this.BtnHard.Location = new System.Drawing.Point(619, 228);
             this.BtnHard.Name = "BtnHard";
             this.BtnHard.Size = new System.Drawing.Size(75, 67);
             this.BtnHard.TabIndex = 13;
@@ -269,27 +287,6 @@
             // 
             this.TmrCountdown.Interval = 1000;
             this.TmrCountdown.Tick += new System.EventHandler(this.TmrCountdown_Tick);
-            // 
-            // LblGameStart
-            // 
-            this.LblGameStart.AutoSize = true;
-            this.LblGameStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblGameStart.Location = new System.Drawing.Point(207, 112);
-            this.LblGameStart.Name = "LblGameStart";
-            this.LblGameStart.Size = new System.Drawing.Size(182, 20);
-            this.LblGameStart.TabIndex = 16;
-            this.LblGameStart.Text = "Seconds till game starts:";
-            this.LblGameStart.Visible = false;
-            // 
-            // LblToStart
-            // 
-            this.LblToStart.AutoSize = true;
-            this.LblToStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblToStart.Location = new System.Drawing.Point(272, 144);
-            this.LblToStart.Name = "LblToStart";
-            this.LblToStart.Size = new System.Drawing.Size(31, 33);
-            this.LblToStart.TabIndex = 17;
-            this.LblToStart.Text = "3";
             // 
             // FrmAssessment
             // 
@@ -313,9 +310,9 @@
             this.Controls.Add(this.PnlGame);
             this.Name = "FrmAssessment";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.FrmAssessment_Load_1);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmAssessment_KeyDown_1);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FrmAssessment_KeyUp_1);
+            this.Load += new System.EventHandler(this.FrmAssessment_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmAssessment_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FrmAssessment_KeyUp);
             this.PnlGame.ResumeLayout(false);
             this.PnlGame.PerformLayout();
             this.ResumeLayout(false);

@@ -70,7 +70,7 @@ namespace Assessment
 
                 if (level == 1)
                 { 
-                    sharkSpeed[i] = speed.Next(1, 15); // If the level is 1, then each shark has a random speed between 1 and 15
+                    sharkSpeed[i] = speed.Next(6, 15); // If the level is 1, then each shark has a random speed between 1 and 15
                 }
 
                 if (level == 2)
@@ -121,7 +121,7 @@ namespace Assessment
             }
         }
 
-        private void FrmAssessment_KeyUp_1(object sender, KeyEventArgs e)
+        private void FrmAssessment_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Left) { left = false; } // If the left key is pressed, then disable the surfer left fuction
             if (e.KeyData == Keys.Right) { right = false; } // If the right key is pressed, then disable the surfer right fuction
@@ -129,15 +129,15 @@ namespace Assessment
             if (e.KeyData == Keys.Down) { down = false; } // If the down key is pressed, then disable the surfer down fuction
         }
 
-        private void FrmAssessment_KeyDown_1(object sender, KeyEventArgs e)
+        private void FrmAssessment_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.Left) { left = false; } // If the left key is pressed, then enable the surfer left fuction
-            if (e.KeyData == Keys.Right) { right = false; } // If the right key is pressed, then enable the surfer right fuction
-            if (e.KeyData == Keys.Up) { up = false; } // If the up key is pressed, then enable the surfer up fuction
-            if (e.KeyData == Keys.Down) { down = false; } // If the down key is pressed, then enable the surfer down fuction
+            if (e.KeyData == Keys.Left) { left = true; } // If the left key is pressed, then enable the surfer left fuction
+            if (e.KeyData == Keys.Right) { right = true; } // If the right key is pressed, then enable the surfer right fuction
+            if (e.KeyData == Keys.Up) { up = true; } // If the up key is pressed, then enable the surfer up fuction
+            if (e.KeyData == Keys.Down) { down = true; } // If the down key is pressed, then enable the surfer down fuction
         }
 
-        private void TmrShark_Tick_1(object sender, EventArgs e)
+        private void TmrShark_Tick(object sender, EventArgs e)
         {
             if (IfButtonClick == 1)
             { // Only run the code if a difficulty button has been pressed
@@ -173,71 +173,66 @@ namespace Assessment
 
 
 
-        private void BottleTimer_Tick_1(object sender, EventArgs e)
+        private void BottleTimer_Tick(object sender, EventArgs e)
         {
-                bottleRectangle.X += bottleSpeed;
-                //if spaceship collides with any planet lose a life and move planet to the top of the panel
-                if (bottleRectangle.IntersectsWith(surferRectangle))
-                {
-                    Random RandYValue = new Random();
-                    int yValueInt = 0;
-                    yValueInt = RandYValue.Next(20, 500);
-                    bottleRectangle.X = -30;
-                    bottleRectangle.Y = yValueInt;
+            bottleRectangle.X += bottleSpeed; // Set the speed of the bottle on timer tick
 
-                    BottleTimer.Enabled = false;
+            // If the bottle rectangle touches the surfer
+            if (bottleRectangle.IntersectsWith(surferRectangle))
+            {
+                Random RandYValue = new Random(); // Generate a random y value 
+                int yValueInt = 0; // Generate a intager
+                yValueInt = RandYValue.Next(20, 500); // Make the y value between 20 and 500 in the panel
+                bottleRectangle.X = -30; // Move the bottle back to the start of the panel, but of the screen so the user cannot see it
+                bottleRectangle.Y = yValueInt; // Set the y value of the botttle to the yValueInt varible
 
-                    Random BottlePrize = new Random();
-                    int BottlePrizeNumber = BottlePrize.Next(1, 5);  // creates a number between 1 and 10
+                BottleTimer.Enabled = false; // Disable the bottle timer for another 15 seconds
 
-                    if (BottlePrizeNumber == 1)
-                    {
-                        lives++; // add one to lives
-                        LvsTxt.Text = lives.ToString();
-                    }
+                Random BottlePrize = new Random(); // Genrate a random number
+                int BottlePrizeNumber = BottlePrize.Next(1, 5);  // Make the random number between 1 and 4
 
-                    if (BottlePrizeNumber == 2)
-                    {
-                        lives++; // add one to lives
-                        LvsTxt.Text = lives.ToString();
-                    }
-
-                    if (BottlePrizeNumber == 3)
-                    {
-                        lives++; // add one to lives
-                        LvsTxt.Text = lives.ToString();
-                    }
-
-                    if (BottlePrizeNumber == 4)
-                    {
-                        lives--; // remove one from lives
-                        LvsTxt.Text = lives.ToString();
-                    }
+                if (BottlePrizeNumber == 1)
+                { // If the random number generated is equal to 1
+                    lives++; // Add one to lives count
+                    LvsTxt.Text = lives.ToString(); // Convert it to a string then dispaly it on the LvsTxt textbox
                 }
 
-                if (bottleRectangle.X > PnlGame.Width)
+                if (BottlePrizeNumber == 2)
                 {
-                Random RandYValue = new Random();
-                int yValueInt = 0;
-                yValueInt = RandYValue.Next(20, 500);
-                bottleRectangle.X = -30;
-                bottleRectangle.Y = yValueInt;
+                    lives++; // Add one to lives count
+                    LvsTxt.Text = lives.ToString(); // Convert it to a string then dispaly it on the LvsTxt textbox
+                }
 
-                BottleTimer.Enabled = false;
+                if (BottlePrizeNumber == 3)
+                {
+                    lives++; // Add one to lives count
+                    LvsTxt.Text = lives.ToString(); // Convert it to a string then dispaly it on the LvsTxt textbox
+                }
+
+                if (BottlePrizeNumber == 4)
+                {
+                    lives--; // Remove one from the lives count
+                    LvsTxt.Text = lives.ToString(); // Convert it to a string then dispaly it on the LvsTxt textbox
+                }
+            }
+
+            if (bottleRectangle.X > PnlGame.Width)
+            { // If the bottle reaches the end of the panel
+                Random RandYValue = new Random(); // Generate a random y value 
+                int yValueInt = 0; // Generate a intager
+                yValueInt = RandYValue.Next(20, 500); // Make the y value between 20 and 500 in the panel
+                bottleRectangle.X = -30; // Move the bottle back to the start of the panel, but of the screen so the user cannot see it
+                bottleRectangle.Y = yValueInt; // Set the y value of the botttle to the yValueInt varible
+
+                BottleTimer.Enabled = false; // Disable the bottle timer for another 15 seconds
             }
 
         }
 
 
-        private void BottleTimeWait_Tick_1(object sender, EventArgs e)
+        private void BottleTimeWait_Tick(object sender, EventArgs e)
         {
-            BottleTimer.Enabled = true;
-        }
-
-        private void LblWelcome_Click(object sender, EventArgs e)
-        {
-
-
+            BottleTimer.Enabled = true; // Once 15 seconds has passed, re-enable the bottle timer to move the bottle
         }
 
         private void TbUsername_TextChanged(object sender, EventArgs e)
@@ -272,8 +267,6 @@ namespace Assessment
 
                 }
 
-    
-
             }
 
             // if not a letter clear the textbox and focus on it
@@ -295,7 +288,7 @@ namespace Assessment
 
 
         private void BtnEasy_Click(object sender, EventArgs e)
-        {
+        { // If the user clicks on the easy difficulty button
             if (usermamevalid == 0)
             {
                 LblToStart.Visible = true;
@@ -346,7 +339,7 @@ namespace Assessment
         }
 
         private void BtnMedium_Click(object sender, EventArgs e)
-        {
+        { // If the user clicks on the medium difficulty button
             if (usermamevalid == 0)
             {
                 LblToStart.Visible = true;
@@ -396,7 +389,7 @@ namespace Assessment
         }
 
         private void BtnHard_Click(object sender, EventArgs e)
-        {
+        { // If the user clicks on the hard difficulty button
             if (usermamevalid == 0)
             {
                 LblToStart.Visible = true;
@@ -467,23 +460,19 @@ namespace Assessment
             }
         }
 
-        private void levelprogress_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void PnlGame_Paint(object sender, PaintEventArgs e)
-        {
+        { 
             if (IfButtonClick == 1)
-            {
-                //get the methods from the graphic's class to paint on the panel
-                g = e.Graphics;
-                //use the DrawImage method to draw the spaceship on the panel
-                g.DrawImage(surfer, surferRectangle);
+            { // Only if a difficulty button has been pressed
 
+                // Get the methods from the graphic's class to paint on the panel
+                g = e.Graphics;
+
+                // Use the DrawImage method to draw the surfer and bottle onto the panel
+                g.DrawImage(surfer, surferRectangle);
                 g.DrawImage(bottle, bottleRectangle);
 
-                //use the DrawImage method to draw the planet on the panel
+                // Use the DrawImage method to draw each of the sharks onto the panel
                 for (int i = 0; i <= 4; i++)
                 {
                     g.DrawImage(shark, sharksRectangle[i]);
@@ -491,101 +480,90 @@ namespace Assessment
             }
         }
 
-        //the CheckLives method will stop the planets and spaceship moving if there are no lives left
-        // and a game over message will be displayed  
         private void CheckLives()
-        {
+        { // Initiate the CheckLives method/ function
             if (lives == 0)
-            {
+            { // If the user has no lives left
+                // Disable the timers
                 TmrShark.Enabled = false;
                 TmrSurfer.Enabled = false;
                 BottleTimer.Enabled = false;
                 BottleTimeWait.Enabled = false;
-                MessageBox.Show("Game Over!! You reached level " + level + ", score " + score + "!");
-                this.Close();
+
+                MessageBox.Show("Game Over!! You reached level " + level + ", score " + score + "!"); // Display the game over message, telling the user their level and score count
+                this.Close(); // Close the form
             }
         }
 
-        //the CheckLives method will stop the planets and spaceship moving if there are no lives left
-        // and a game over message will be displayed  
         private void CheckScore()
-        {
+        { // Initiate the CheckScore method/ function
             if (score % 25 == 0)
-            {
-                level += 1; //add 1 to level
-                LvlTxt.Text = level.ToString();
+            { // If the score is divisible by 25
+                level += 1; // Add one to level count
+                LvlTxt.Text = level.ToString(); // Convert the level to a string, then display it on the LvlTxt textbox
 
-                levelprogress.Value = 0;
+                levelprogress.Value = 0; // Set the levelprogress bar to a value of 0
+                levelprogress.Step = 0; // Set the levelprogress bar to a step of 0
 
-                // Set the Step property to a value of 1 to represent each file being copied.
-                levelprogress.Step = 0;
-
-                score = 0;
-                ScoreTxt.Text = score.ToString();
+                score = 0; // Set the score count to 0
+                ScoreTxt.Text = score.ToString(); // Convert the score to a string, then display it on the ScoreTxt textbox
 
             }
         }
 
-
-
-
-        private void TmrSurfer_Tick_1(object sender, EventArgs e)
-        {
-            if (left) // if left arrow pressed
-            {
-                if (surferRectangle.X < 10) //check to see if spaceship within 10 of left side
-                {
-                    surferRectangle.X = 10; //if it is < 10 away "bounce" it (set position at 10)
+        private void TmrSurfer_Tick(object sender, EventArgs e)
+        { // On tick of the TmrSurfer
+            if (left)
+            { // If the left arrow key is set to true
+                if (surferRectangle.X < 10)
+                { // If the surfer is within 10 of the left side
+                    surferRectangle.X = 10; // Set the surfer to 'bounce' of the side of the panel (at position 10 on the X axis)
                 }
                 else
                 {
-                    surferRectangle.X -= 9; //else move 5 to the left
+                    surferRectangle.X -= 9; // Else move the surfer 9 towards to the left in the panel
                 }
             }
-            if (right) // if right arrow key pressed
-            {
-                if (surferRectangle.X > PnlGame.Width - 40)// is spaceship within 40 of right side
-                {
-                    surferRectangle.X = PnlGame.Width - 40;
-                }
-                else
-                {
-                    surferRectangle.X += 9;
+            if (right)
+            { // If the right arrow key is set to true
+                if (surferRectangle.X > PnlGame.Width - 40)
+                { // If the surfer is within 10 of the right side
+                    surferRectangle.X = PnlGame.Width - 40; // Set the surfer to 'bounce' of the side of the panel (at position of 40 less than the PnlGame width)
                 }
 
-            }
-
-            if (up) // if right arrow key pressed
-            {
-                if (surferRectangle.Y < 15)// is spaceship within 40 of right side
-                {
-                    surferRectangle.Y = 15;
-                }
                 else
                 {
-                    surferRectangle.Y -= 9;
+                    surferRectangle.X += 9; // Else move the surfer 9 towards to the right in the panel
                 }
             }
 
-            if (down) // if right arrow key pressed
-            {
-                if (surferRectangle.Y > PnlGame.Height - 40)// is spaceship within 40 of right side
-                {
-                    surferRectangle.Y = PnlGame.Height - 40;
+            if (up)
+            { // If the up arrow key is set to true
+                if (surferRectangle.Y < 15)
+                { // If the surfer is within 15 of the top
+                    surferRectangle.Y = 15; // Set the surfer to 'bounce' of the side of the panel (at position of 15 from the top of the panel)
                 }
                 else
                 {
-                    surferRectangle.Y += 9;
+                    surferRectangle.Y -= 9; // Else move the surfer 9 towards to the top in the panel
+                }
+            }
+
+            if (down)
+            { // If the down arrow key is set to true
+                if (surferRectangle.Y > PnlGame.Height - 40)
+                { // If the surfer is within 10 of the bottom of the panel
+                    surferRectangle.Y = PnlGame.Height - 40; // Set the surfer to 'bounce' of the bottom of the panel (at position of 40 of the height of the panel)
+                }
+                else
+                {
+                    surferRectangle.Y += 9; // Else move the surfer 9 towards to the bottom in the panel
                 }
             }
         }
 
-        
-
-   
-
-        private void FrmAssessment_Load_1(object sender, EventArgs e)
-        {
+        private void FrmAssessment_Load(object sender, EventArgs e)
+        { // On load of the form
             LvlCount.Visible = false;
             LvlTxt.Visible = false;
             ScoreCount.Visible = false;
@@ -605,7 +583,5 @@ namespace Assessment
             LblGameStart.Visible = false;
 
         }
-
-
     }
 }
