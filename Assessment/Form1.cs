@@ -236,65 +236,59 @@ namespace Assessment
         }
 
         private void TbUsername_TextChanged(object sender, EventArgs e)
-        {
-            string context = TbUsername.Text;
-            bool isletter = true;
+        { // On change up of the textbox
+            string context = TbUsername.Text; // Create a string with the value of the TbUsername value
+            bool isletter = true; // Create a bool that sets isletter to ture
 
             if (context == "")
-            {
-                // empty error
-                usermamevalid = 1;
+            { // If the username textbox is empty
+                usermamevalid = 1; // Set the usernamevalid to 1, which disables the user from selecting a difficulty
             }
 
             else
-            {
-                usermamevalid = 0;
+            { // The username is not empty
+                usermamevalid = 0; // Set the usernamevalid to 0, which enables the user to select a difficulty
             }
-
-            //for loop checks for letters as characters are entered
+            
             for (int i = 0; i < context.Length; i++)
             {
-                if (!char.IsLetter(context[i]))// if current character not a letter
-                {
-                    isletter = false;//make isletter false
-                    usermamevalid = 1;
-
+                if (!char.IsLetter(context[i]))
+                { // If the current character is not a letter
+                    isletter = false; // Make isletter false
+                    usermamevalid = 1; // Set the usernamevalid to 1, which disables the user from selecting a difficulty
                 }
 
                 else
                 {
-                    usermamevalid = 0;
-
+                    usermamevalid = 0; // Set the usernamevalid to 0, which enables the user to select a difficulty
                 }
-
             }
 
             // if not a letter clear the textbox and focus on it
             // to enter name again
             if (isletter == false)
-            {
-                TbUsername.Clear();
-                TbUsername.Focus();
+            { // If isletter is equal to false 
+                TbUsername.Clear(); // Remove all characters in the username textbox 
+                TbUsername.Focus(); // Focuse the user onto the username textbox to set the user to editing the username
 
-                usermamevalid = 1;
+                usermamevalid = 1; // Set the usernamevalid to 1, which disables the user from selecting a difficulty
             }
 
             else
             {
-                usermamevalid = 0;
+                usermamevalid = 0; // Set the usernamevalid to 0, which enables the user to select a difficulty
             }
-
         }
-
 
         private void BtnEasy_Click(object sender, EventArgs e)
         { // If the user clicks on the easy difficulty button
             if (usermamevalid == 0)
-            {
+            { // If the user name is valid
+                // Show the countdown to the game starts
                 LblToStart.Visible = true;
                 LblGameStart.Visible = true;
 
-                TbUsername.Enabled = false;
+                // Display the sidebar elements such as lives textbox, lives label, etc
                 LvlCount.Visible = true;
                 LvlTxt.Visible = true;
                 ScoreCount.Visible = true;
@@ -305,47 +299,48 @@ namespace Assessment
                 levelprogress.Visible = true;
                 LblName.Visible = true;
 
+                // Hide the welcome to game message, username, instructions
                 LblInstructions.Visible = false;
                 TbUsername.Visible = false;
                 LblWelcome.Visible = false;
-
                 LblUsername.Visible = false;
 
+                // Hide the difficulty buttons
                 BtnHard.Visible = false;
                 BtnMedium.Visible = false;
                 BtnEasy.Visible = false;
 
+                // Disable the difficulty buttons to allow the surfer to move
                 BtnHard.Enabled = false;
                 BtnMedium.Enabled = false;
                 BtnEasy.Enabled = false;
 
-                IfButtonClick = 1;
+                IfButtonClick = 1; // Set the button as clicked
 
+                // Disable the timers
                 TmrShark.Enabled = false;
                 TmrSurfer.Enabled = false;
                 BottleTimer.Enabled = false;
                 BottleTimeWait.Enabled = false;
 
-                TmrCountdown.Start();
-                
+                lives = 5; // Set the lives count to 5
+                LvsTxt.Text = lives.ToString(); // Display the lives count in the LvsText textbox
 
-                PnlGame.Width = 579;
+                TmrCountdown.Start(); // Start the countdown timer
 
-                lives = 5; // set to 5
-                LvsTxt.Text = lives.ToString();
-
-                LblName.Text = "Welcome " + TbUsername.Text;
+                LblName.Text = "Welcome " + TbUsername.Text; // Edit the text to say Welcome then their name
             }
         }
 
         private void BtnMedium_Click(object sender, EventArgs e)
         { // If the user clicks on the medium difficulty button
             if (usermamevalid == 0)
-            {
+            { // If the user name is valid
+                // Show the countdown to the game starts
                 LblToStart.Visible = true;
                 LblGameStart.Visible = true;
 
-                TbUsername.Enabled = false;
+                // Display the sidebar elements such as lives textbox, lives label, etc
                 LvlCount.Visible = true;
                 LvlTxt.Visible = true;
                 ScoreCount.Visible = true;
@@ -356,46 +351,48 @@ namespace Assessment
                 levelprogress.Visible = true;
                 LblName.Visible = true;
 
+                // Hide the welcome to game message, username, instructions
                 LblInstructions.Visible = false;
                 TbUsername.Visible = false;
                 LblWelcome.Visible = false;
-
                 LblUsername.Visible = false;
 
+                // Hide the difficulty buttons
                 BtnHard.Visible = false;
                 BtnMedium.Visible = false;
                 BtnEasy.Visible = false;
 
+                // Disable the difficulty buttons to allow the surfer to move
                 BtnHard.Enabled = false;
                 BtnMedium.Enabled = false;
                 BtnEasy.Enabled = false;
 
-                IfButtonClick = 1;
+                IfButtonClick = 1; // Set the button as clicked
 
+                // Disable the timers
                 TmrShark.Enabled = false;
                 TmrSurfer.Enabled = false;
                 BottleTimer.Enabled = false;
                 BottleTimeWait.Enabled = false;
 
-                PnlGame.Width = 579;
+                lives = 3; // Set the lives count to 3
+                LvsTxt.Text = lives.ToString(); // Display the lives count in the LvsText textbox
 
-                lives = 3;
-                LvsTxt.Text = lives.ToString();
+                TmrCountdown.Start(); // Start the countdown timer
 
-                TmrCountdown.Start();
-
-                LblName.Text = "Welcome " + TbUsername.Text;
+                LblName.Text = "Welcome " + TbUsername.Text; // Edit the text to say Welcome then their name
             }
         }
 
         private void BtnHard_Click(object sender, EventArgs e)
         { // If the user clicks on the hard difficulty button
             if (usermamevalid == 0)
-            {
+            { // If the user name is valid
+                // Show the countdown to the game starts
                 LblToStart.Visible = true;
                 LblGameStart.Visible = true;
 
-                TbUsername.Enabled = false;
+                // Display the sidebar elements such as lives textbox, lives label, etc
                 LvlCount.Visible = true;
                 LvlTxt.Visible = true;
                 ScoreCount.Visible = true;
@@ -406,57 +403,61 @@ namespace Assessment
                 levelprogress.Visible = true;
                 LblName.Visible = true;
 
+                // Hide the welcome to game message, username, instructions
                 LblInstructions.Visible = false;
                 TbUsername.Visible = false;
                 LblWelcome.Visible = false;
-
                 LblUsername.Visible = false;
 
+                // Hide the difficulty buttons
                 BtnHard.Visible = false;
                 BtnMedium.Visible = false;
                 BtnEasy.Visible = false;
 
+                // Disable the difficulty buttons to allow the surfer to move
                 BtnHard.Enabled = false;
                 BtnMedium.Enabled = false;
                 BtnEasy.Enabled = false;
 
-                IfButtonClick = 1;
+                IfButtonClick = 1; // Set the button as clicked
 
+                // Disable the timers
                 TmrShark.Enabled = false;
                 TmrSurfer.Enabled = false;
                 BottleTimer.Enabled = false;
                 BottleTimeWait.Enabled = false;
 
-                lives = 1;
+                lives = 1; // Set the lives count to 1
+                LvsTxt.Text = lives.ToString(); // Display the lives count in the LvsText textbox
 
-                LvsTxt.Text = lives.ToString();
+                TmrCountdown.Start(); // Start the countdown timer
 
-                TmrCountdown.Start();
-
-                LblName.Text = "Welcome " + TbUsername.Text;
+                LblName.Text = "Welcome " + TbUsername.Text; // Edit the text to say Welcome then their name
             }
         }
 
         private void TmrCountdown_Tick(object sender, EventArgs e)
-        {
-            timercount--;
-            LblToStart.Text = timercount.ToString();
+        { // On tick of the TmrCountdown
+            timercount--; // Decrease one from the timer
+            LblToStart.Text = timercount.ToString(); // Display the timer value on the panel
 
             if (timercount == 3)
-            {
-                LblGameStart.Visible = true;
+            { // If the timer value is equal to 3
+                LblGameStart.Visible = true; // Display the time till game start text
             }
 
             if (timercount == 0)
-            {
-                LblToStart.Visible = false;
-                LblGameStart.Visible = false;
-
-                TmrShark.Enabled = true;
+            { // If the timer value is equal to 0
+                LblToStart.Visible = false; // Hide the second countdown
+                LblGameStart.Visible = false; // Hide the time till game start text
+                
+                // Enable the games timers
+                TmrShark.Enabled = true; 
                 TmrSurfer.Enabled = true;
                 BottleTimer.Enabled = true;
                 BottleTimeWait.Enabled = true;
-                TmrCountdown.Stop();
+
+                TmrCountdown.Stop(); // Stop the TmrCountdown
             }
         }
 
