@@ -40,7 +40,7 @@ namespace Assessment
         int IfButtonClick = 0;
         int usermamevalid = 0;
 
-        // Declare the up, down, left and right key press
+        // Declare the up, down, left and right keys bool, which is later used to detect a key press
         bool left, right, up, down;
 
         // Declare random varibles
@@ -58,8 +58,8 @@ namespace Assessment
             // Declare the rectangles
             surferRectangle = new Rectangle(x2, y2, 50, 40); // Define the surfers's rectangle	
 
-            RandomXValue = yValue.Next(20, 100);
-            bottleRectangle = new Rectangle(-30, RandomXValue, 30, 30);// Define the bottle rectangle	
+            RandomXValue = yValue.Next(20, 100); // Generate a random Y valuse for the bottles starting position
+            bottleRectangle = new Rectangle(-30, RandomXValue, 30, 30); // Define the bottle rectangle	
 
 
             // Position each shark onto the panel using a for loop
@@ -226,9 +226,7 @@ namespace Assessment
 
                 BottleTimer.Enabled = false; // Disable the bottle timer for another 15 seconds
             }
-
         }
-
 
         private void BottleTimeWait_Tick(object sender, EventArgs e)
         {
