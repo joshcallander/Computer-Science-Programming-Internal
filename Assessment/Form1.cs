@@ -563,6 +563,7 @@ namespace Assessment
 
         private void FrmAssessment_Load(object sender, EventArgs e)
         { // On load of the form
+            // Hide the sidebar elements like lives, level and score counts and labels
             LvlCount.Visible = false;
             LvlTxt.Visible = false;
             ScoreCount.Visible = false;
@@ -573,11 +574,13 @@ namespace Assessment
             levelprogress.Visible = false;
             LblName.Visible = false;
 
+            // Enable all timers
             TmrShark.Enabled = true;
             TmrSurfer.Enabled = true;
             BottleTimer.Enabled = false;
             BottleTimeWait.Enabled = true;
 
+            // Hide the countdown elements
             LblToStart.Visible = false;
             LblGameStart.Visible = false;
 
