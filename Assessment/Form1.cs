@@ -489,8 +489,8 @@ namespace Assessment
                 BottleTimer.Enabled = false;
                 BottleTimeWait.Enabled = false;
 
-                MessageBox.Show("Game Over!! You reached level " + level + ", score " + score + "!"); // Display the game over message, telling the user their level and score count
-                this.Close(); // Close the form
+                MessageBox.Show("Game Over!! You lost all your lives and reached level " + level + ", score " + score + "!"); // Display the game over message, telling the user their level and score count
+                this.Close(); // Close the game
             }
         }
 
