@@ -36,9 +36,10 @@ namespace Assessment
         int score = 0;
         int level = 1;
         int lives = 0;
-        int timercount = 3;
-        int IfButtonClick = 0;
-        int usermamevalid = 0;
+        int TimerCount = 3;
+        int TmrPopUpCount = 3;
+        int ButtonClicked = 0;
+        int UsernameValid = 0;
 
         // Declare the up, down, left and right keys bool, which is later used to detect a key press
         bool left, right, up, down;
@@ -67,57 +68,6 @@ namespace Assessment
             {
                 // Declare the rectangle to put the shark image in for each shark
                 sharksRectangle[i] = new Rectangle(y, x + 70 * i, 45, 40);
-
-                if (level == 1)
-                { 
-                    sharkSpeed[i] = speed.Next(6, 15); // If the level is 1, then each shark has a random speed between 1 and 15
-                }
-
-                if (level == 2)
-                {
-                    sharkSpeed[i] = speed.Next(10, 20); // If the level is 2, then each shark has a random speed between 10 and 20
-                }
-
-
-                if (level == 3)
-                {
-                    sharkSpeed[i] = speed.Next(15, 20); // If the level is 3, then each shark has a random speed between 15 and 20
-                }
-
-                if (level == 4)
-                {
-                    sharkSpeed[i] = speed.Next(20, 22); // If the level is 4, then each shark has a random speed between 20 and 22
-                }
-
-                if (level == 5)
-                {
-                    sharkSpeed[i] = speed.Next(20, 22); // If the level is 5, then each shark has a random speed between 20 and 22
-                }
-
-                if (level == 6)
-                {
-                    sharkSpeed[i] = speed.Next(21, 24); // If the level is 6, then each shark has a random speed between 21 and 24
-                }
-
-                if (level == 7)
-                {
-                    sharkSpeed[i] = speed.Next(21, 24); // If the level is 7, then each shark has a random speed between 21 and 24
-                }
-
-                if (level == 8)
-                {
-                    sharkSpeed[i] = speed.Next(21, 24); // If the level is 8, then each shark has a random speed between 21 and 24
-                }
-
-                if (level == 9)
-                {
-                    sharkSpeed[i] = speed.Next(25, 30); // If the level is 9, then each shark has a random speed between 25 and 30
-                }
-
-                if (level > 9)
-                {
-                    sharkSpeed[i] = speed.Next(25, 30); // If the level is greater than 9, then each shark has a random speed between 25 and 30
-                }
             }
         }
 
@@ -139,10 +89,60 @@ namespace Assessment
 
         private void TmrShark_Tick(object sender, EventArgs e)
         {
-            if (IfButtonClick == 1)
+            if (ButtonClicked == 1)
             { // Only run the code if a difficulty button has been pressed
                 for (int i = 0; i <= 4; i++)
                 { // Run the code for each of the 5 sharks
+                    if (level == 1)
+                    {
+                        sharkSpeed[i] = speed.Next(4, 15); // If the level is 1, then each shark has a random speed between 4 and 15
+                    }
+
+                    if (level == 2)
+                    {
+                        sharkSpeed[i] = speed.Next(10, 20); // If the level is 2, then each shark has a random speed between 10 and 20
+                    }
+
+                    if (level == 3)
+                    {
+                        sharkSpeed[i] = speed.Next(15, 20); // If the level is 3, then each shark has a random speed between 15 and 20
+                    }
+
+                    if (level == 4)
+                    {
+                        sharkSpeed[i] = speed.Next(20, 22); // If the level is 4, then each shark has a random speed between 20 and 22
+                    }
+
+                    if (level == 5)
+                    {
+                        sharkSpeed[i] = speed.Next(20, 22); // If the level is 5, then each shark has a random speed between 20 and 22
+                    }
+
+                    if (level == 6)
+                    {
+                        sharkSpeed[i] = speed.Next(21, 24); // If the level is 6, then each shark has a random speed between 21 and 24
+                    }
+
+                    if (level == 7)
+                    {
+                        sharkSpeed[i] = speed.Next(21, 24); // If the level is 7, then each shark has a random speed between 21 and 24
+                    }
+
+                    if (level == 8)
+                    {
+                        sharkSpeed[i] = speed.Next(21, 24); // If the level is 8, then each shark has a random speed between 21 and 24
+                    }
+
+                    if (level == 9)
+                    {
+                        sharkSpeed[i] = speed.Next(25, 30); // If the level is 9, then each shark has a random speed between 25 and 30
+                    }
+
+                    if (level > 9)
+                    {
+                        sharkSpeed[i] = speed.Next(25, 30); // If the level is greater than 9, then each shark has a random speed between 25 and 30
+                    }
+
                     sharksRectangle[i].X += sharkSpeed[i]; // Set each shark to the correct speed
 
                     if (sharksRectangle[i].IntersectsWith(surferRectangle))
@@ -151,6 +151,10 @@ namespace Assessment
                         lives -= 1; // Reduce lives count by one
                         LvsTxt.Text = lives.ToString(); // Display the number of lives remaining on the LvsTxt textbox
                         CheckLives(); // Initiate the function that checks how many lives the user has
+
+                        TmrPopUp.Start();
+                        LblPopUp.Visible = true; // Display the popup text
+                        LblPopUp.Text = "You lost a life. You now have " + lives + " lives remaining";
                     }
 
                     if (sharksRectangle[i].X > PnlGame.Width)
@@ -160,8 +164,8 @@ namespace Assessment
                         ScoreTxt.Text = score.ToString(); // Display the score count on the ScoreTxt textbox
 
                         // Increase the value/ step the level progressbar by one
-                        levelprogress.Value += 1;
-                        levelprogress.Step += 1;
+                        LevelProgress.Value += 1;
+                        LevelProgress.Step += 1;
 
                         CheckScore(); // Initiate the function that checks the score the user is on and if the level needs increasing
                     }
@@ -175,56 +179,76 @@ namespace Assessment
 
         private void BottleTimer_Tick(object sender, EventArgs e)
         {
-            bottleRectangle.X += bottleSpeed; // Set the speed of the bottle on timer tick
+            if (ButtonClicked == 1)
+            { // Only run the code if a difficulty button has been pressed
 
-            // If the bottle rectangle touches the surfer
-            if (bottleRectangle.IntersectsWith(surferRectangle))
-            {
-                Random RandYValue = new Random(); // Generate a random y value 
-                int yValueInt = 0; // Generate a intager
-                yValueInt = RandYValue.Next(20, 500); // Make the y value between 20 and 500 in the panel
-                bottleRectangle.X = -30; // Move the bottle back to the start of the panel, but of the screen so the user cannot see it
-                bottleRectangle.Y = yValueInt; // Set the y value of the botttle to the yValueInt varible
+                bottleRectangle.X += bottleSpeed; // Set the speed of the bottle on timer tick
 
-                BottleTimer.Enabled = false; // Disable the bottle timer for another 15 seconds
-
-                Random BottlePrize = new Random(); // Genrate a random number
-                int BottlePrizeNumber = BottlePrize.Next(1, 5);  // Make the random number between 1 and 4
-
-                if (BottlePrizeNumber == 1)
-                { // If the random number generated is equal to 1
-                    lives++; // Add one to lives count
-                    LvsTxt.Text = lives.ToString(); // Convert it to a string then dispaly it on the LvsTxt textbox
-                }
-
-                if (BottlePrizeNumber == 2)
+                // If the bottle rectangle touches the surfer
+                if (bottleRectangle.IntersectsWith(surferRectangle))
                 {
-                    lives++; // Add one to lives count
-                    LvsTxt.Text = lives.ToString(); // Convert it to a string then dispaly it on the LvsTxt textbox
+                    Random RandYValue = new Random(); // Generate a random y value 
+                    int yValueInt = 0; // Generate a intager
+                    yValueInt = RandYValue.Next(20, 500); // Make the y value between 20 and 500 in the panel
+                    bottleRectangle.X = -30; // Move the bottle back to the start of the panel, but of the screen so the user cannot see it
+                    bottleRectangle.Y = yValueInt; // Set the y value of the botttle to the yValueInt varible
+
+                    BottleTimer.Enabled = false; // Disable the bottle timer for another 15 seconds
+
+                    Random BottlePrize = new Random(); // Genrate a random number
+                    int BottlePrizeNumber = BottlePrize.Next(1, 5);  // Make the random number between 1 and 4
+
+                    if (BottlePrizeNumber == 1)
+                    { // If the random number generated is equal to 1
+                        lives++; // Add one to lives count
+                        LvsTxt.Text = lives.ToString(); // Convert it to a string then dispaly it on the LvsTxt textbox
+
+                        TmrPopUp.Start();
+                        LblPopUp.Visible = true; // Display the popup text
+                        LblPopUp.Text = "You gained a life. You now have " + lives + " lives remaining";
+                    }
+
+                    if (BottlePrizeNumber == 2)
+                    {
+                        lives++; // Add one to lives count
+                        LvsTxt.Text = lives.ToString(); // Convert it to a string then dispaly it on the LvsTxt textbox
+
+                        TmrPopUp.Start();
+                        LblPopUp.Visible = true; // Display the popup text
+                        LblPopUp.Text = "You gained a life. You now have " + lives + " lives remaining";
+                    }
+
+                    if (BottlePrizeNumber == 3)
+                    {
+                        lives++; // Add one to lives count
+                        LvsTxt.Text = lives.ToString(); // Convert it to a string then dispaly it on the LvsTxt textbox
+
+                        TmrPopUp.Start();
+                        LblPopUp.Visible = true; // Display the popup text
+                        LblPopUp.Text = "You gained a life. You now have " + lives + " lives remaining";
+                    }
+
+                    if (BottlePrizeNumber == 4)
+                    {
+                        lives--; // Remove one from the lives count
+                        LvsTxt.Text = lives.ToString(); // Convert it to a string then dispaly it on the LvsTxt textbox
+
+                        TmrPopUp.Start();
+                        LblPopUp.Visible = true; // Display the popup text
+                        LblPopUp.Text = "You lost a life. You now have " + lives + " lives remaining";
+                    }
                 }
 
-                if (BottlePrizeNumber == 3)
-                {
-                    lives++; // Add one to lives count
-                    LvsTxt.Text = lives.ToString(); // Convert it to a string then dispaly it on the LvsTxt textbox
+                if (bottleRectangle.X > PnlGame.Width)
+                { // If the bottle reaches the end of the panel
+                    Random RandYValue = new Random(); // Generate a random y value 
+                    int yValueInt = 0; // Generate a intager
+                    yValueInt = RandYValue.Next(20, 500); // Make the y value between 20 and 500 in the panel
+                    bottleRectangle.X = -30; // Move the bottle back to the start of the panel, but of the screen so the user cannot see it
+                    bottleRectangle.Y = yValueInt; // Set the y value of the botttle to the yValueInt varible
+
+                    BottleTimer.Enabled = false; // Disable the bottle timer for another 15 seconds
                 }
-
-                if (BottlePrizeNumber == 4)
-                {
-                    lives--; // Remove one from the lives count
-                    LvsTxt.Text = lives.ToString(); // Convert it to a string then dispaly it on the LvsTxt textbox
-                }
-            }
-
-            if (bottleRectangle.X > PnlGame.Width)
-            { // If the bottle reaches the end of the panel
-                Random RandYValue = new Random(); // Generate a random y value 
-                int yValueInt = 0; // Generate a intager
-                yValueInt = RandYValue.Next(20, 500); // Make the y value between 20 and 500 in the panel
-                bottleRectangle.X = -30; // Move the bottle back to the start of the panel, but of the screen so the user cannot see it
-                bottleRectangle.Y = yValueInt; // Set the y value of the botttle to the yValueInt varible
-
-                BottleTimer.Enabled = false; // Disable the bottle timer for another 15 seconds
             }
         }
 
@@ -235,52 +259,45 @@ namespace Assessment
 
         private void TbUsername_TextChanged(object sender, EventArgs e)
         { // On change up of the textbox
-            string context = TbUsername.Text; // Create a string with the value of the TbUsername value
-            bool isletter = true; // Create a bool that sets isletter to ture
+            string UsernameValue = TbUsername.Text; // Create a string with the value of the TbUsername value
 
-            if (context == "")
+            if (UsernameValue == "")
             { // If the username textbox is empty
-                usermamevalid = 1; // Set the usernamevalid to 1, which disables the user from selecting a difficulty
+                UsernameValid = 1; // Set the usernamevalid to 1, which disables the user from selecting a difficulty
+
+                TmrPopUp.Start();
+                LblPopUp.Visible = true; // Display the popup text
+                LblPopUp.Text = "Please enter a username. Remember no numbers allowed!";
             }
 
             else
             { // The username is not empty
-                usermamevalid = 0; // Set the usernamevalid to 0, which enables the user to select a difficulty
+                UsernameValid = 0; // Set the usernamevalid to 0, which enables the user to select a difficulty
             }
             
-            for (int i = 0; i < context.Length; i++)
+            for (int i = 0; i < UsernameValue.Length; i++)
             {
-                if (!char.IsLetter(context[i]))
+                if (!char.IsLetter(UsernameValue[i]))
                 { // If the current character is not a letter
-                    isletter = false; // Make isletter false
-                    usermamevalid = 1; // Set the usernamevalid to 1, which disables the user from selecting a difficulty
+                    TbUsername.Clear(); // Remove all characters in the username textbox 
+                    TbUsername.Focus(); // Focuse the user onto the username textbox to set the user to editing the username
+                    UsernameValid = 1; // Set the usernamevalid to 1, which disables the user from selecting a difficulty
+
+                    TmrPopUp.Start();
+                    LblPopUp.Visible = true; // Display the popup text
+                    LblPopUp.Text = "Remember no numbers allowed!";
                 }
 
                 else
                 {
-                    usermamevalid = 0; // Set the usernamevalid to 0, which enables the user to select a difficulty
+                    UsernameValid = 0; // Set the usernamevalid to 0, which enables the user to select a difficulty
                 }
-            }
-
-            // if not a letter clear the textbox and focus on it
-            // to enter name again
-            if (isletter == false)
-            { // If isletter is equal to false 
-                TbUsername.Clear(); // Remove all characters in the username textbox 
-                TbUsername.Focus(); // Focuse the user onto the username textbox to set the user to editing the username
-
-                usermamevalid = 1; // Set the usernamevalid to 1, which disables the user from selecting a difficulty
-            }
-
-            else
-            {
-                usermamevalid = 0; // Set the usernamevalid to 0, which enables the user to select a difficulty
             }
         }
 
         private void BtnEasy_Click(object sender, EventArgs e)
         { // If the user clicks on the easy difficulty button
-            if (usermamevalid == 0)
+            if (UsernameValid == 0)
             { // If the user name is valid
                 // Show the countdown to the game starts
                 LblToStart.Visible = true;
@@ -294,7 +311,7 @@ namespace Assessment
                 label1.Visible = true;
                 LvsCount.Visible = true;
                 LvsTxt.Visible = true;
-                levelprogress.Visible = true;
+                LevelProgress.Visible = true;
                 LblName.Visible = true;
 
                 // Hide the welcome to game message, username, instructions
@@ -312,9 +329,7 @@ namespace Assessment
                 BtnHard.Enabled = false;
                 BtnMedium.Enabled = false;
                 BtnEasy.Enabled = false;
-
-                IfButtonClick = 1; // Set the button as clicked
-
+                
                 // Disable the timers
                 TmrShark.Enabled = false;
                 TmrSurfer.Enabled = false;
@@ -327,12 +342,16 @@ namespace Assessment
                 TmrCountdown.Start(); // Start the countdown timer
 
                 LblName.Text = "Welcome " + TbUsername.Text; // Edit the text to say Welcome then their name
+
+                TmrPopUp.Start();
+                LblPopUp.Visible = true; // Display the popup text
+                LblPopUp.Text = "Easy difficulty selected";
             }
         }
 
         private void BtnMedium_Click(object sender, EventArgs e)
         { // If the user clicks on the medium difficulty button
-            if (usermamevalid == 0)
+            if (UsernameValid == 0)
             { // If the user name is valid
                 // Show the countdown to the game starts
                 LblToStart.Visible = true;
@@ -346,7 +365,7 @@ namespace Assessment
                 label1.Visible = true;
                 LvsCount.Visible = true;
                 LvsTxt.Visible = true;
-                levelprogress.Visible = true;
+                LevelProgress.Visible = true;
                 LblName.Visible = true;
 
                 // Hide the welcome to game message, username, instructions
@@ -364,8 +383,6 @@ namespace Assessment
                 BtnHard.Enabled = false;
                 BtnMedium.Enabled = false;
                 BtnEasy.Enabled = false;
-
-                IfButtonClick = 1; // Set the button as clicked
 
                 // Disable the timers
                 TmrShark.Enabled = false;
@@ -379,12 +396,16 @@ namespace Assessment
                 TmrCountdown.Start(); // Start the countdown timer
 
                 LblName.Text = "Welcome " + TbUsername.Text; // Edit the text to say Welcome then their name
+
+                TmrPopUp.Start();
+                LblPopUp.Visible = true; // Display the popup text
+                LblPopUp.Text = "Medium difficulty selected";
             }
         }
 
         private void BtnHard_Click(object sender, EventArgs e)
         { // If the user clicks on the hard difficulty button
-            if (usermamevalid == 0)
+            if (UsernameValid == 0)
             { // If the user name is valid
                 // Show the countdown to the game starts
                 LblToStart.Visible = true;
@@ -398,7 +419,7 @@ namespace Assessment
                 label1.Visible = true;
                 LvsCount.Visible = true;
                 LvsTxt.Visible = true;
-                levelprogress.Visible = true;
+                LevelProgress.Visible = true;
                 LblName.Visible = true;
 
                 // Hide the welcome to game message, username, instructions
@@ -417,8 +438,6 @@ namespace Assessment
                 BtnMedium.Enabled = false;
                 BtnEasy.Enabled = false;
 
-                IfButtonClick = 1; // Set the button as clicked
-
                 // Disable the timers
                 TmrShark.Enabled = false;
                 TmrSurfer.Enabled = false;
@@ -431,24 +450,30 @@ namespace Assessment
                 TmrCountdown.Start(); // Start the countdown timer
 
                 LblName.Text = "Welcome " + TbUsername.Text; // Edit the text to say Welcome then their name
+
+                TmrPopUp.Start();
+                LblPopUp.Visible = true; // Display the popup text
+                LblPopUp.Text = "Hard difficulty selected";
             }
         }
 
         private void TmrCountdown_Tick(object sender, EventArgs e)
         { // On tick of the TmrCountdown
-            timercount--; // Decrease one from the timer
-            LblToStart.Text = timercount.ToString(); // Display the timer value on the panel
+            TimerCount--; // Decrease one from the timer
+            LblToStart.Text = TimerCount.ToString(); // Display the timer value on the panel
 
-            if (timercount == 3)
+            if (TimerCount == 3)
             { // If the timer value is equal to 3
                 LblGameStart.Visible = true; // Display the time till game start text
             }
 
-            if (timercount == 0)
+            if (TimerCount == 0)
             { // If the timer value is equal to 0
                 LblToStart.Visible = false; // Hide the second countdown
                 LblGameStart.Visible = false; // Hide the time till game start text
-                
+
+                ButtonClicked = 1; // Set the button as clicked
+
                 // Enable the games timers
                 TmrShark.Enabled = true; 
                 TmrSurfer.Enabled = true;
@@ -456,12 +481,35 @@ namespace Assessment
                 BottleTimeWait.Enabled = true;
 
                 TmrCountdown.Stop(); // Stop the TmrCountdown
+
+                TmrPopUp.Start();
+                LblPopUp.Visible = true; // Display the popup text
+                LblPopUp.Text = "Game started";
+            }
+        }
+
+        private void TmrPopUp_Tick(object sender, EventArgs e)
+        { // On tick of the TmrPopUp
+            TmrPopUpCount--; // Decrease one from the timer
+
+            if (TmrPopUpCount == 3)
+            { // If the timer value is equal to 3
+                LblPopUp.Visible = true; // Display the popup text
+            }
+
+            if (TmrPopUpCount == 0)
+            { // If the timer value is equal to 0
+                LblPopUp.Visible = false; // Hide the popup text
+
+                TmrPopUpCount = 3;
+
+                TmrPopUp.Stop(); // Stop the TmrPopUp
             }
         }
 
         private void PnlGame_Paint(object sender, PaintEventArgs e)
         { 
-            if (IfButtonClick == 1)
+            if (ButtonClicked == 1)
             { // Only if a difficulty button has been pressed
 
                 // Get the methods from the graphic's class to paint on the panel
@@ -489,6 +537,10 @@ namespace Assessment
                 BottleTimer.Enabled = false;
                 BottleTimeWait.Enabled = false;
 
+                TmrPopUp.Start();
+                LblPopUp.Visible = true; // Display the popup text
+                LblPopUp.Text = "Game over!";
+
                 MessageBox.Show("Game Over!! You lost all your lives and reached level " + level + ", score " + score + "!"); // Display the game over message, telling the user their level and score count
                 this.Close(); // Close the game
             }
@@ -496,17 +548,20 @@ namespace Assessment
 
         private void CheckScore()
         { // Initiate the CheckScore method/ function
-            if (score % 25 == 0)
+            if (score % 20 == 0)
             { // If the score is divisible by 25
                 level += 1; // Add one to level count
                 LvlTxt.Text = level.ToString(); // Convert the level to a string, then display it on the LvlTxt textbox
 
-                levelprogress.Value = 0; // Set the levelprogress bar to a value of 0
-                levelprogress.Step = 0; // Set the levelprogress bar to a step of 0
+                LevelProgress.Value = 0; // Set the levelprogress bar to a value of 0
+                LevelProgress.Step = 0; // Set the levelprogress bar to a step of 0
 
                 score = 0; // Set the score count to 0
                 ScoreTxt.Text = score.ToString(); // Convert the score to a string, then display it on the ScoreTxt textbox
 
+                TmrPopUp.Start();
+                LblPopUp.Visible = true; // Display the popup text
+                LblPopUp.Text = "You reached level " + level;
             }
         }
 
@@ -571,7 +626,7 @@ namespace Assessment
             label1.Visible = false;
             LvsCount.Visible = false;
             LvsTxt.Visible = false;
-            levelprogress.Visible = false;
+            LevelProgress.Visible = false;
             LblName.Visible = false;
 
             // Enable all timers
@@ -584,6 +639,7 @@ namespace Assessment
             LblToStart.Visible = false;
             LblGameStart.Visible = false;
 
+            LblPopUp.Visible = false;
         }
     }
 }

@@ -45,7 +45,7 @@
             this.ScoreCount = new System.Windows.Forms.Label();
             this.LvsTxt = new System.Windows.Forms.TextBox();
             this.LvsCount = new System.Windows.Forms.Label();
-            this.levelprogress = new System.Windows.Forms.ProgressBar();
+            this.LevelProgress = new System.Windows.Forms.ProgressBar();
             this.label1 = new System.Windows.Forms.Label();
             this.BottleTimer = new System.Windows.Forms.Timer(this.components);
             this.BottleTimeWait = new System.Windows.Forms.Timer(this.components);
@@ -54,6 +54,8 @@
             this.BtnMedium = new System.Windows.Forms.Button();
             this.BtnHard = new System.Windows.Forms.Button();
             this.TmrCountdown = new System.Windows.Forms.Timer(this.components);
+            this.LblPopUp = new System.Windows.Forms.Label();
+            this.TmrPopUp = new System.Windows.Forms.Timer(this.components);
             this.PnlGame.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -207,18 +209,19 @@
             this.LvsCount.TabIndex = 6;
             this.LvsCount.Text = "Lives";
             // 
-            // levelprogress
+            // LevelProgress
             // 
-            this.levelprogress.BackColor = System.Drawing.Color.Black;
-            this.levelprogress.Cursor = System.Windows.Forms.Cursors.Default;
-            this.levelprogress.ForeColor = System.Drawing.Color.Black;
-            this.levelprogress.Location = new System.Drawing.Point(603, 124);
-            this.levelprogress.Maximum = 25;
-            this.levelprogress.Name = "levelprogress";
-            this.levelprogress.Size = new System.Drawing.Size(109, 23);
-            this.levelprogress.Step = 25;
-            this.levelprogress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.levelprogress.TabIndex = 7;            // 
+            this.LevelProgress.BackColor = System.Drawing.Color.Black;
+            this.LevelProgress.Cursor = System.Windows.Forms.Cursors.Default;
+            this.LevelProgress.ForeColor = System.Drawing.Color.Black;
+            this.LevelProgress.Location = new System.Drawing.Point(603, 124);
+            this.LevelProgress.Maximum = 20;
+            this.LevelProgress.Name = "LevelProgress";
+            this.LevelProgress.Size = new System.Drawing.Size(109, 23);
+            this.LevelProgress.Step = 20;
+            this.LevelProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.LevelProgress.TabIndex = 7;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -288,19 +291,35 @@
             this.TmrCountdown.Interval = 1000;
             this.TmrCountdown.Tick += new System.EventHandler(this.TmrCountdown_Tick);
             // 
+            // LblPopUp
+            // 
+            this.LblPopUp.AutoSize = true;
+            this.LblPopUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblPopUp.Location = new System.Drawing.Point(13, 426);
+            this.LblPopUp.Name = "LblPopUp";
+            this.LblPopUp.Size = new System.Drawing.Size(129, 18);
+            this.LblPopUp.TabIndex = 14;
+            this.LblPopUp.Text = "Username Display";
+            // 
+            // TmrPopUp
+            // 
+            this.TmrPopUp.Interval = 1000;
+            this.TmrPopUp.Tick += new System.EventHandler(this.TmrPopUp_Tick);
+            // 
             // FrmAssessment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DimGray;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(737, 482);
+            this.ClientSize = new System.Drawing.Size(737, 453);
+            this.Controls.Add(this.LblPopUp);
             this.Controls.Add(this.BtnHard);
             this.Controls.Add(this.BtnMedium);
             this.Controls.Add(this.BtnEasy);
             this.Controls.Add(this.LblName);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.levelprogress);
+            this.Controls.Add(this.LevelProgress);
             this.Controls.Add(this.LvsCount);
             this.Controls.Add(this.LvsTxt);
             this.Controls.Add(this.ScoreCount);
@@ -308,8 +327,9 @@
             this.Controls.Add(this.LvlTxt);
             this.Controls.Add(this.LvlCount);
             this.Controls.Add(this.PnlGame);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmAssessment";
-            this.Text = "Form1";
+            this.Text = "Josh\'s Game";
             this.Load += new System.EventHandler(this.FrmAssessment_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmAssessment_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FrmAssessment_KeyUp);
@@ -331,7 +351,7 @@
         private System.Windows.Forms.Label ScoreCount;
         private System.Windows.Forms.TextBox LvsTxt;
         private System.Windows.Forms.Label LvsCount;
-        private System.Windows.Forms.ProgressBar levelprogress;
+        private System.Windows.Forms.ProgressBar LevelProgress;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Timer BottleTimer;
         private System.Windows.Forms.Timer BottleTimeWait;
@@ -346,6 +366,8 @@
         private System.Windows.Forms.Timer TmrCountdown;
         private System.Windows.Forms.Label LblToStart;
         private System.Windows.Forms.Label LblGameStart;
+        private System.Windows.Forms.Label LblPopUp;
+        private System.Windows.Forms.Timer TmrPopUp;
     }
 }
 
